@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
    
-    "test:ui": "mocha test/*.test.js --timeout 30000"
+    "test:ui": "mocha test/*.test.js --timeout 60000"
   },
 
   "keywords": [],

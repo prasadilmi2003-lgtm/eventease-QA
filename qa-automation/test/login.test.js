@@ -37,8 +37,8 @@ describe('Login page', function () {
     await loginPage.login('attendee@demo.com', 'Demo@1234');
     await loginPage.waitForNavigationAway();
 
-    const url = await driver.getCurrentUrl();
-    assert.ok(!url.includes('/login'), `expected to navigate away from /login, got ${url}`);
+    const path = new URL(await driver.getCurrentUrl()).pathname;
+    assert.strictEqual(path, '/attendee');
   });
 
   it('shows an error with incorrect credentials', async function () {
