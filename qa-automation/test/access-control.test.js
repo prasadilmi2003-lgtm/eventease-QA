@@ -53,4 +53,20 @@ describe("Access control", function () {
     const path = new URL(await driver.getCurrentUrl()).pathname;
     assert.strictEqual(path, "/attendee");
   });
+
+    // Test that an organizer is redirected to the organizer dashboard when trying to access the attendee route
+  it("sends an organizer back to /organizer when opening /attendee", async function () {
+    await loginPage.open();
+    await loginPage.login("organizer@demo.com", "Demo@1234");
+    await loginPage.waitForNavigationAway();
+
+    await driver.get(`${BASE_URL}/attendee`);
+    await driver.wait(
+      async () =>
+        new URL(await driver.getCurrentUrl()).pathname === "/organizer",
+      10000,
+    );
+    const path = new URL(await driver.getCurrentUrl()).pathname;
+    assert.strictEqual(path, "/organizer");
+  });
 });
