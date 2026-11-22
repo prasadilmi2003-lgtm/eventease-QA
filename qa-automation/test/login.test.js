@@ -47,7 +47,7 @@ describe('Login page', function () {
     const text = await loginPage.getErrorText();
     assert.ok(/incorrect|invalid/i.test(text), `expected an error message, got "${text}"`);
 
-    const url = await driver.getCurrentUrl();
-    assert.ok(url.includes('/login'), 'expected to remain on /login after a failed login');
+    const path = new URL(await driver.getCurrentUrl()).pathname;
+    assert.strictEqual(path, '/login');
   });
 });
