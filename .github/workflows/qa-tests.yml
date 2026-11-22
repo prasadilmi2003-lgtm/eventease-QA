@@ -1,0 +1,72 @@
+name: QA Tests
+
+on:
+  push:
+    branches: [member4-automation, main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ui-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Create backend .env file
+        working-directory: server
+        run: |
+          echo "PORT=5000" >> .env
+          echo "MONGODB_URI=mongodb://127.0.0.1:27017/eventease" >> .env
+          echo "JWT_SECRET=ci_test_secret_key_not_for_production_12345" >> .env
+          echo "CLIENT_URL=http://localhost:5180" >> .env
+          echo "NODE_ENV=development" >> .env
+          echo "ADMIN_EMAIL=admin@test.com" >> .env
+          echo "ADMIN_PASSWORD=Admin@12345" >> .env
+
+      - name: Install backend and seed database
+        working-directory: server
+        run: |
+          npm install
+          npm run seed
+
+      - name: Start backend
+        working-directory: server
+        run: nohup npm start > ../backend.log 2>&1 &
+
+      - name: Wait for backend to be ready
+        run: curl -sf --retry 30 --retry-delay 2 --retry-connrefused http://localhost:5000/api/health
+
+      - name: Install and start frontend
+        working-directory: client
+        run: |
+          npm install
+          cp .env.example .env
+          nohup npm run dev -- --host --strictPort > ../frontend.log 2>&1 &
+
+      - name: Wait for frontend to be ready
+        run: curl -sf --retry 30 --retry-delay 2 --retry-connrefused http://localhost:5180
+
+      - name: Run Selenium UI tests
+        working-directory: qa-automation
+        run: |
+          npm install
+          npm run test:ui
+
+      - name: Show logs if something failed
+        if: failure()
+        run: |
+          cat backend.log
+          cat frontend.log
