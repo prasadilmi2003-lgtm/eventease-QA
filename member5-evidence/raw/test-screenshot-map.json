@@ -1,0 +1,112 @@
+{
+  "A06-01": [
+    "owasp-01-backend-npm-audit.png"
+  ],
+  "A06-02": [
+    "owasp-02-frontend-npm-audit.png"
+  ],
+  "A01-01": [
+    "owasp-03-admin-access-control.png",
+    "owasp-13-role-restrictions-terminal.png"
+  ],
+  "A01-02": [
+    "owasp-04-organizer-access-control.png",
+    "owasp-13-role-restrictions-terminal.png"
+  ],
+  "A01-03": [
+    "owasp-05-unauthenticated-access.png",
+    "owasp-13-role-restrictions-terminal.png"
+  ],
+  "A01-04": [
+    "owasp-06-attendee-b-bookings.png",
+    "owasp-07-idor-booking-access.png",
+    "owasp-12-idor-booking-response-body.png"
+  ],
+  "A01-05": [
+    "owasp-13-role-restrictions-terminal.png"
+  ],
+  "A01-08": [
+    "owasp-13-role-restrictions-terminal.png"
+  ],
+  "A01-10": [
+    "owasp-13-role-restrictions-terminal.png"
+  ],
+  "A01-11": [
+    "owasp-13-role-restrictions-terminal.png"
+  ],
+  "A01-13": [
+    "owasp-13-role-restrictions-terminal.png"
+  ],
+  "A01-15": [
+    "owasp-14-token-forgery-mass-assignment-terminal.png"
+  ],
+  "A01-16": [
+    "owasp-14-token-forgery-mass-assignment-terminal.png"
+  ],
+  "A01-18": [
+    "owasp-14-token-forgery-mass-assignment-terminal.png"
+  ],
+  "A02-01": [
+    "owasp-25-session-cookie-flags-terminal.png"
+  ],
+  "A03-01": [
+    "owasp-08-nosql-injection.png",
+    "owasp-14-token-forgery-mass-assignment-terminal.png"
+  ],
+  "A03-02": [
+    "owasp-15-error-handling-500-terminal.png"
+  ],
+  "A03-03": [
+    "owasp-15-error-handling-500-terminal.png"
+  ],
+  "A03-04": [
+    "owasp-15-error-handling-500-terminal.png"
+  ],
+  "A03-08": [
+    "owasp-23-profileimage-no-server-validation-terminal.png"
+  ],
+  "A03-09": [
+    "owasp-22-review-endpoints-unreachable-terminal.png"
+  ],
+  "A03-10": [
+    "owasp-09-xss-event-title.png",
+    "owasp-09a-xss-event-title-manage-events.png"
+  ],
+  "A03-11": [
+    "owasp-10a-xss-contact-form-payload-entered.png",
+    "owasp-10-xss-contact-form.png"
+  ],
+  "A03-12": [
+    "owasp-11-xss-profile-name.png"
+  ],
+  "A05-01": [
+    "owasp-16-security-headers-api-terminal.png"
+  ],
+  "A05-02": [
+    "owasp-16b-security-headers-frontend-terminal.png"
+  ],
+  "A05-03": [
+    "owasp-17-cors-untrusted-origin-terminal.png"
+  ],
+  "A05-04": [
+    "owasp-15-error-handling-500-terminal.png"
+  ],
+  "A05-05": [
+    "owasp-15-error-handling-500-terminal.png"
+  ],
+  "A05-08": [
+    "owasp-21-env-gitignore-terminal.png"
+  ],
+  "A07-01": [
+    "owasp-18-login-rate-limit-terminal.png"
+  ],
+  "A07-02": [
+    "owasp-19-password-policy-enumeration-terminal.png"
+  ],
+  "A07-04": [
+    "owasp-19-password-policy-enumeration-terminal.png"
+  ],
+  "A07-05": [
+    "owasp-20-session-after-logout-terminal.png"
+  ]
+}

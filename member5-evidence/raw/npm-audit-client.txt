@@ -1,0 +1,2 @@
+{"info":0,"low":0,"moderate":0,"high":1,"critical":0,"total":1}
+  follow-redirects high direct=false fix=yes via=follow-redirects: Cross-realm sensitiveHeaders arrays are discarded and custom credentials can follow redirects

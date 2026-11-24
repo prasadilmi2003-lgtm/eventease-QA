@@ -1,0 +1,29 @@
+{
+  "ranAt": "2026-11-24T06:06:16.304Z",
+  "results": [
+    {
+      "id": "A03-10",
+      "status": "PASS",
+      "actual": "Event details h1 text = \"<script>alert('XSS-Test')</script>\"; <script> elements injected into DOM = 0; alert dialogs fired = 0; document.title = \"EventEase – Discover Events. Create Memories.\"",
+      "screenshot": "owasp-09-xss-event-title.png"
+    },
+    {
+      "id": "A03-11",
+      "status": "PASS",
+      "actual": "Server accepted the payload (success message shown = true); alert dialogs fired = 0; injected <img src=x> elements = 0. The form re-renders values via React text bindings, so the payload stays inert.",
+      "notes": "The raw payload is stored unmodified in the database (no output encoding needed server-side for JSON APIs, but any future admin view must also escape it). No admin screen displays contact messages today, so stored rendering could not be checked.",
+      "screenshot": "owasp-10-xss-contact-form.png"
+    },
+    {
+      "id": "A03-12",
+      "status": "PASS",
+      "actual": "Profile name saved as \"<img src=x onerror=alert('XSS-Test')>\" and re-loaded; injected <img src=x> elements = 0; alert dialogs fired = 0",
+      "screenshot": "owasp-11-xss-profile-name.png"
+    },
+    {
+      "id": "A02-05",
+      "status": "PASS",
+      "actual": "localStorage keys=[]; sessionStorage keys=[]; document.cookie exposes token = false; cookie flags = [{\"name\":\"eventease_token\",\"httpOnly\":true,\"secure\":false,\"sameSite\":\"Lax\",\"path\":\"/\",\"expiresInDays\":7}]; JWT found in web storage = false"
+    }
+  ]
+}

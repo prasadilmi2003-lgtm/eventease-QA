@@ -1,0 +1,5 @@
+{"info":0,"low":0,"moderate":2,"high":2,"critical":0,"total":4}
+  body-parser high direct=false fix=yes via=body-parser vulnerable to Denial of Service via trailing bytes after a compressed request body
+  minimatch moderate direct=false fix=nodemon@3.1.11 (major) via=minimatch has potential denial of service via globparts amplification
+  mongoose high direct=true fix=yes via=Mongoose: Connection-level sanitizeFilter not applied / Mongoose: Discriminator key values matching inherited properties (e.g. __t: 'constructor') bypass schema casting and can poison collections
+  nodemon moderate direct=true fix=nodemon@3.1.11 (major) via=minimatch
