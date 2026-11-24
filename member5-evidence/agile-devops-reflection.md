@@ -2,7 +2,7 @@
 
 **Member 5 – Security & Quality Assurance (EC4206 Section 3.10)**
 
-> This reflection is grounded in what the repository and the testing actually showed. It does not claim practices that were not used. The student author should add personal experience (meetings, team coordination) where marked **[add your own]**.
+> This reflection is grounded in what the repository and the testing actually showed. It does not claim practices that were not used. Team meetings and communication channels are not recorded anywhere in the repository, so they are deliberately not described.
 
 ## 1. What the project workflow actually looked like
 | Observation | Evidence |
@@ -20,7 +20,7 @@ The assignment structure puts security and quality assurance at the end. The res
 ## 3. Continuous integration and delivery
 - **What exists:** push-to-deploy hosting is described (Render/Vercel), which is a form of continuous delivery, but nothing gates the deploy.
 - **What is missing:** an automated pipeline that runs install, audit, lint, tests and SonarQube on every pull request. Every tool used in this report (`npm audit`, SonarScanner, axe, the API test harness) is scriptable, so each could become a pipeline stage with "fail on new high vulnerability / new bug" gates.
-- **Honest note:** Member 4's CI/CD work lives on another branch and was not reviewed by Member 5, so no statement is made about it here. **[add your own: how the group coordinated on this]**
+- **Honest note:** Member 4's CI/CD work lives on another branch and was not reviewed by Member 5, so no statement is made about it here.
 
 ## 4. Security testing (DevSecOps)
 Dynamic testing found real weaknesses that static analysis did not: SonarQube reported nothing about missing rate limiting, CORS fail-open, token revocation or unreachable routes, while it did find the ReDoS-prone regex that tests would not have spotted. The lesson is to combine **SAST (SonarQube), dependency scanning (`npm audit`) and DAST-style tests** in the pipeline, and to re-run the same tests after each fix as regression tests.
@@ -32,7 +32,7 @@ SonarQube rated maintainability A with 0.4 % duplication, but coverage is 0 % an
 Bugs were recorded in a structured register (severity, priority, evidence) and analysed with 5-Whys. Three recurring root causes emerged: controls added but not wired in, inconsistent validation between endpoints, and no automated negative/accessibility testing. The defined lifecycle (New → … → Closed/Reopened) was documented, but because no fixes have been made, no bug has actually moved past **New**. In a real Agile team these would be triaged into the next sprint backlog by priority (P1 first).
 
 ## 7. Collaboration
-Evidence is organised as plain files (screenshots, raw JSON, Markdown) in one folder so that any member can reproduce a finding. The work of other members is expected to connect to these results (for example, black-box and white-box test cases may cover the same validation gaps, and the CI/CD pipeline is where the recommended checks belong) but Member 5 did not review those deliverables. **[add your own: communication tools, meetings, how blockers were handled]**
+Evidence is organised as plain files (screenshots, raw JSON, Markdown) in one folder so that any member can reproduce a finding. The work of other members is expected to connect to these results (for example, black-box and white-box test cases may cover the same validation gaps, and the CI/CD pipeline is where the recommended checks belong) but Member 5 did not review those deliverables.
 
 ## 8. Improvements for future development
 1. Write security and negative tests with each story; keep them in the repository.

@@ -19,7 +19,7 @@ Member 5 tested EventEase for security, usability/accessibility and code quality
 | 6 | Run SonarQube analysis | **Done** (Docker, real dashboard screenshots) | `sonarqube-analysis.md` |
 | 7 | Report quality metrics | **Done** (SUS and task metrics marked n/a) | `quality-metrics.md` |
 | 8 | Recommend improvements | **Done** | `recommendations.md` |
-| 9 | Agile and DevOps reflection | **Done as a draft; contains `[add your own]` prompts for personal experience** | `agile-devops-reflection.md` |
+| 9 | Agile and DevOps reflection | **Done** (based only on repository evidence; team meetings and tools are not described because they are not recorded) | `agile-devops-reflection.md` |
 
 ## 3. Key security results
 | Test group | Result |
@@ -50,7 +50,7 @@ Expert inspection plus a scripted task walkthrough (7 of 7 runnable tasks comple
 
 ## 8. Work that still needs the team (blocked for me)
 1. **Run the participant usability sessions** (≥ 5 people, consent) and fill `usability-kit/*.csv`; then compute SUS with `node usability-kit/calculate-sus.mjs usability-kit/sus-responses.csv` and write `usability-testing-results.md`.
-2. **Personalise the reflection** (`[add your own]` parts) and decide how the report should state AI assistance — check the course's AI-use policy and disclose as required.
+2. **Decide how the report states AI assistance**: check the course's AI-use policy and disclose as required. You may also add your own team experience (meetings, coordination) to the reflection if you want it.
 3. Re-check `Secure` cookie flag, CORS and headers on the **deployed** site if the report should cover production.
 4. Decide whether to apply the fixes (nothing was changed) and then re-run the tests to move bugs through Retest → Verified → Closed.
 5. Optional: OWASP ZAP baseline scan (needs approval to download the image).
