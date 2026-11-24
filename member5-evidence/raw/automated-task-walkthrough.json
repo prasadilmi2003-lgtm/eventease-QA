@@ -1,0 +1,106 @@
+{
+  "ranAt": "2026-11-24T07:19:12.282Z",
+  "note": "Scripted user in real Chrome; not human participants",
+  "results": [
+    {
+      "id": "T1",
+      "role": "Attendee",
+      "task": "Find a Tech event and open its details",
+      "success": true,
+      "clicks": 3,
+      "fieldsFilled": 0,
+      "machineMs": 6129,
+      "note": "landed on /events/6b04a6fbf26b73745c45492c",
+      "screenshot": "usability-auto-T1-find-tech-event.png"
+    },
+    {
+      "id": "T2",
+      "role": "Attendee",
+      "task": "Book one ticket for an open event",
+      "success": true,
+      "clicks": 3,
+      "fieldsFilled": 0,
+      "machineMs": 5432,
+      "note": "confirmation page /attendee/bookings/6b053a48ff9375ca87c7a741; event \"Charity 10K Fun Run\"",
+      "screenshot": "usability-auto-T2-booking-confirmed.png"
+    },
+    {
+      "id": "T2b",
+      "role": "Attendee",
+      "task": "Cancel the booking made in T2 (cleanup, restores inventory)",
+      "success": true,
+      "clicks": 2,
+      "fieldsFilled": 0,
+      "machineMs": 5630,
+      "note": "status text contains \"cancelled\"",
+      "screenshot": "usability-auto-T2b-booking-cancelled.png"
+    },
+    {
+      "id": "T3",
+      "role": "Attendee",
+      "task": "Find your ticket and its QR code",
+      "success": true,
+      "clicks": 2,
+      "fieldsFilled": 0,
+      "machineMs": 5037,
+      "note": "on My tickets; QR graphics shown: 5; each ticket also shows its code and a Download button",
+      "screenshot": "usability-auto-T3-my-tickets.png"
+    },
+    {
+      "id": "T4",
+      "role": "Attendee",
+      "task": "Save an event and find it under Saved events",
+      "success": true,
+      "clicks": 3,
+      "fieldsFilled": 0,
+      "machineMs": 8290,
+      "note": "\"CodeCamp: Web Dev Bootcamp\" listed under Saved events: true; un-saved afterwards",
+      "screenshot": "usability-auto-T4-saved-events.png"
+    },
+    {
+      "id": "T5",
+      "role": "Organizer",
+      "task": "Create an event with one free ticket type and submit for approval",
+      "success": true,
+      "clicks": 4,
+      "fieldsFilled": 8,
+      "machineMs": 7167,
+      "note": "row: \"[QA-M5] automated usability test event Sat 23 Jan, 7:19 Pending 0 / 10 \"; cleanup delete status 200",
+      "screenshot": "usability-auto-T5-event-submitted.png"
+    },
+    {
+      "id": "T7",
+      "role": "Organizer",
+      "task": "Find how many tickets are sold for an event",
+      "success": true,
+      "clicks": 2,
+      "fieldsFilled": 0,
+      "machineMs": 4910,
+      "note": "Sold column readable on Manage events: \"ert Sat 12 Dec, 18:00 Published 3 / 500 \"",
+      "screenshot": "usability-auto-T7-tickets-sold.png"
+    },
+    {
+      "id": "T6",
+      "role": "Organizer",
+      "task": "Check in a ticket by code",
+      "success": null,
+      "note": "NOT RUN: a check-in permanently marks a seeded ticket as used; left for a human test."
+    },
+    {
+      "id": "K1",
+      "role": "Visitor",
+      "task": "Keyboard only: Tab presses before focus reaches main content on Home",
+      "success": true,
+      "note": "12 Tab presses to first control inside <main> (\"Event name\"); visible focus indicator (outline) = false",
+      "screenshot": "usability-auto-keyboard-first-main-focus.png"
+    },
+    {
+      "id": "K2",
+      "role": "Visitor",
+      "task": "Keyboard only: Tab presses to reach the login form",
+      "success": true,
+      "note": "12 Tab presses",
+      "screenshot": ""
+    }
+  ]
+}

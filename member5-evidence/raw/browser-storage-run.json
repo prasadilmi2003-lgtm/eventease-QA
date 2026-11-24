@@ -1,0 +1,18 @@
+{
+  "store": {
+    "localStorage": [],
+    "sessionStorage": [],
+    "documentCookie": ""
+  },
+  "cookies": [
+    {
+      "name": "eventease_token",
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax",
+      "path": "/",
+      "expiresInDays": 7
+    }
+  ],
+  "jwtInWebStorage": false
+}

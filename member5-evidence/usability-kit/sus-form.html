@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EventEase usability session form</title>
+<style>
+  :root { --bg:#f8fafc; --card:#fff; --ink:#0f172a; --muted:#475569; --line:#cbd5e1; --brand:#5b21b6; --ok:#166534; --bad:#b91c1c; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0f172a; --card:#1e293b; --ink:#f1f5f9; --muted:#cbd5e1; --line:#475569; --brand:#c4b5fd; --ok:#86efac; --bad:#fca5a5; } }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,Segoe UI,Arial,sans-serif; padding:16px; }
+  main { max-width:820px; margin:0 auto; }
+  h1 { font-size:1.4rem; margin:.2rem 0 }
+  h2 { font-size:1.1rem; margin:0 0 .6rem }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin:14px 0; }
+  .muted { color:var(--muted); font-size:.92rem }
+  label { display:block; font-weight:600; margin:.6rem 0 .2rem }
+  input[type=text], input[type=number], select, textarea { width:100%; padding:10px; font:inherit; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:8px }
+  :focus-visible { outline:3px solid var(--brand); outline-offset:2px }
+  .row { display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+  table { width:100%; border-collapse:collapse } th, td { text-align:left; padding:6px 4px; border-bottom:1px solid var(--line); vertical-align:top }
+  .q { padding:10px 0; border-bottom:1px solid var(--line) } .q p { margin:0 0 .4rem; font-weight:600 }
+  .scale { display:flex; gap:6px; flex-wrap:wrap; align-items:center }
+  .scale label { display:inline-flex; align-items:center; gap:6px; margin:0; font-weight:500; padding:8px 12px; border:1px solid var(--line); border-radius:8px; cursor:pointer; min-height:44px }
+  .scale input { width:18px; height:18px }
+  .ends { display:flex; justify-content:space-between; font-size:.8rem; color:var(--muted) }
+  button { font:inherit; font-weight:600; padding:12px 18px; border-radius:10px; border:0; background:var(--brand); color:#fff; cursor:pointer; min-height:44px }
+  @media (prefers-color-scheme: dark) { button { color:#1e1b4b } }
+  button.alt { background:transparent; color:var(--ink); border:1px solid var(--line) }
+  .msg { min-height:1.4em; font-weight:600 } .msg.ok { color:var(--ok) } .msg.bad { color:var(--bad) }
+  .hide { display:none }
+</style>
+</head>
+<body>
+<main>
+  <h1>EventEase usability session</h1>
+  <p class="muted">Local form: answers stay in this browser on this laptop until you press the <b>Export</b> buttons. Nothing is sent anywhere. Use one form per participant, with an anonymous ID only (no names).</p>
+
+  <section class="card" aria-labelledby="h-part">
+    <h2 id="h-part">1. Participant (facilitator fills in)</h2>
+    <div class="row">
+      <div><label for="pid">Participant ID</label><input id="pid" type="text" placeholder="P1" autocomplete="off"></div>
+      <div><label for="role">Task set</label>
+        <select id="role"><option value="Attendee">Attendee tasks (T1-T4)</option><option value="Organizer">Organizer tasks (T5-T7)</option></select></div>
+    </div>
+    <label><input id="consent" type="checkbox"> Verbal consent given (they agreed to take part and know they can stop)</label>
+  </section>
+
+  <section class="card" aria-labelledby="h-tasks">
+    <h2 id="h-tasks">2. Task observations (facilitator fills in)</h2>
+    <p class="muted">Completed = reached the success condition without help. Time in seconds. Errors = wrong clicks / wrong pages. Mark "help" if you had to hint.</p>
+    <table><thead><tr><th>Task</th><th>Done?</th><th>Time (s)</th><th>Errors</th><th>Help?</th></tr></thead><tbody id="tasks"></tbody></table>
+    <label for="tcomments">Notes / quotes from the session</label><textarea id="tcomments" rows="3"></textarea>
+  </section>
+
+  <section class="card" aria-labelledby="h-sus">
+    <h2 id="h-sus">3. System Usability Scale (participant fills in)</h2>
+    <p class="muted">Rate each statement: 1 = strongly disagree, 5 = strongly agree. Answer after the tasks, based on your experience.</p>
+    <div id="sus"></div>
+  </section>
+
+  <section class="card">
+    <h2>4. Save</h2>
+    <p id="msg" class="msg" role="status" aria-live="polite"></p>
+    <button id="save" type="button">Save participant</button>
+    <button id="exportSus" type="button" class="alt">Export SUS CSV</button>
+    <button id="exportTasks" type="button" class="alt">Export tasks CSV</button>
+    <button id="clear" type="button" class="alt">Delete all saved</button>
+    <p class="muted" id="count"></p>
+    <ul id="list" class="muted"></ul>
+  </section>
+</main>
+<script>
+const TASKS = {
+  Attendee: [['T1','Find a Tech event and open it'],['T2','Book one ticket'],['T3','Find your ticket and show the QR code'],['T4','Save an event and find it under Saved events']],
+  Organizer: [['T5','Create an event with one free ticket type and submit it'],['T6','Check in the ticket with the code you are given'],['T7','Find how many tickets are sold for an event']]
+};
+const SUS = ['I think that I would like to use EventEase frequently.','I found EventEase unnecessarily complex.','I thought EventEase was easy to use.','I think that I would need the support of a technical person to be able to use EventEase.','I found the various functions in EventEase were well integrated.','I thought there was too much inconsistency in EventEase.','I would imagine that most people would learn to use EventEase very quickly.','I found EventEase very cumbersome to use.','I felt very confident using EventEase.','I needed to learn a lot of things before I could get going with EventEase.'];
+const KEY = 'eventease-usability-v1';
+const $ = (id) => document.getElementById(id);
+const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
+const store = (a) => { try { localStorage.setItem(KEY, JSON.stringify(a)); return true; } catch { return false; } };
+
+$('sus').innerHTML = SUS.map((t, i) => `<div class="q"><p id="q${i}">${i + 1}. ${t}</p><div class="scale" role="radiogroup" aria-labelledby="q${i}">` +
+  [1,2,3,4,5].map((n) => `<label><input type="radio" name="s${i}" value="${n}"> ${n}</label>`).join('') + `</div><div class="ends"><span>Strongly disagree</span><span>Strongly agree</span></div></div>`).join('');
+
+function drawTasks() {
+  $('tasks').innerHTML = TASKS[$('role').value].map(([id, t]) =>
+    `<tr><td><b>${id}</b> ${t}</td>
+     <td><select id="d${id}" aria-label="${id} done"><option value="">-</option><option>Y</option><option>N</option></select></td>
+     <td><input id="t${id}" type="number" min="0" aria-label="${id} seconds"></td>
+     <td><input id="e${id}" type="number" min="0" value="0" aria-label="${id} errors"></td>
+     <td><select id="h${id}" aria-label="${id} help"><option>N</option><option>Y</option></select></td></tr>`).join('');
+}
+function drawList() {
+  const a = load(); $('count').textContent = `${a.length} participant(s) saved in this browser.`;
+  $('list').innerHTML = a.map((p, i) => `<li>${p.id} (${p.role}) <button class="alt" type="button" data-del="${i}" style="padding:4px 10px;min-height:32px">remove</button></li>`).join('');
+}
+function say(t, ok) { $('msg').textContent = t; $('msg').className = 'msg ' + (ok ? 'ok' : 'bad'); }
+
+$('role').addEventListener('change', drawTasks);
+$('list').addEventListener('click', (e) => { const i = e.target.dataset.del; if (i === undefined) return; const a = load(); a.splice(+i, 1); store(a); drawList(); });
+$('save').addEventListener('click', () => {
+  const id = $('pid').value.trim();
+  if (!id) return say('Enter a participant ID (for example P1).', false);
+  if (!$('consent').checked) return say('Tick the consent box first.', false);
+  const sus = SUS.map((_, i) => { const r = document.querySelector(`input[name=s${i}]:checked`); return r ? +r.value : null; });
+  if (sus.includes(null)) return say(`Please answer SUS statement ${sus.indexOf(null) + 1}.`, false);
+  const role = $('role').value;
+  const tasks = TASKS[role].map(([tid]) => ({ id: tid, done: $('d' + tid).value, time: $('t' + tid).value, errors: $('e' + tid).value, help: $('h' + tid).value }));
+  const bad = tasks.find((t) => !t.done || t.time === '');
+  if (bad) return say(`Fill in "Done?" and time for ${bad.id}.`, false);
+  const a = load();
+  if (a.some((p) => p.id === id)) return say(`ID ${id} is already saved. Use a new ID or remove the old one.`, false);
+  a.push({ id, role, tasks, sus, comments: $('tcomments').value.trim() });
+  if (!store(a)) return say('Could not save in this browser (storage blocked). Use a normal window, not private mode.', false);
+  say(`Saved ${id}. Reload the page for the next participant.`, true); drawList();
+  $('pid').value = ''; $('consent').checked = false; $('tcomments').value = ''; document.querySelectorAll('input[type=radio]').forEach((r) => (r.checked = false)); drawTasks();
+});
+const csvCell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+function download(name, text) { const u = URL.createObjectURL(new Blob([text], { type: 'text/csv' })); const a = document.createElement('a'); a.href = u; a.download = name; a.click(); URL.revokeObjectURL(u); }
+$('exportSus').addEventListener('click', () => {
+  const a = load(); if (!a.length) return say('Nothing saved yet.', false);
+  download('sus-responses.csv', 'participant,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10\n' + a.map((p) => [p.id, ...p.sus].join(',')).join('\n') + '\n');
+  say('Downloaded sus-responses.csv. Move it into the usability-kit folder.', true);
+});
+$('exportTasks').addEventListener('click', () => {
+  const a = load(); if (!a.length) return say('Nothing saved yet.', false);
+  download('task-observations.csv', 'participant,role,task_id,completed(Y/N),time_seconds,errors,assistance_needed(Y/N),comments\n' +
+    a.flatMap((p) => p.tasks.map((t) => [p.id, p.role, t.id, t.done, t.time, t.errors, t.help, p.comments].map(csvCell).join(','))).join('\n') + '\n');
+  say('Downloaded task-observations.csv. Move it into the usability-kit folder.', true);
+});
+$('clear').addEventListener('click', () => { if (confirm('Delete ALL saved participants from this browser?')) { store([]); drawList(); say('Deleted.', true); } });
+drawTasks(); drawList();
+</script>
+</body>
+</html>

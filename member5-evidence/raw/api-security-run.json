@@ -1,0 +1,694 @@
+{
+  "ranAt": "2026-11-24T06:04:20.893Z",
+  "target": "http://localhost:5000",
+  "qaAccount": "qa.m5.* (created by this run)",
+  "results": [
+    {
+      "id": "A01-01",
+      "owasp": "A01",
+      "objective": "Attendee must not reach the admin dashboard",
+      "steps": "Login as attendee; GET /api/admin/dashboard",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You do not have permission to access this resource.\"}",
+      "status": "PASS",
+      "notes": "re-verified in this run (first run: owasp-03)",
+      "evidence": {
+        "req": "GET /api/admin/dashboard (attendee)",
+        "status": 403,
+        "body": "{\"message\":\"You do not have permission to access this resource.\"}"
+      }
+    },
+    {
+      "id": "A01-02",
+      "owasp": "A01",
+      "objective": "Attendee must not reach the organizer dashboard",
+      "steps": "Login as attendee; GET /api/organizer/dashboard",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You do not have permission to access this resource.\"}",
+      "status": "PASS",
+      "notes": "re-verified in this run (first run: owasp-04)",
+      "evidence": {
+        "req": "GET /api/organizer/dashboard (attendee)",
+        "status": 403,
+        "body": "{\"message\":\"You do not have permission to access this resource.\"}"
+      }
+    },
+    {
+      "id": "A01-03",
+      "owasp": "A01",
+      "objective": "Unauthenticated request to admin dashboard is rejected",
+      "steps": "No cookie; GET /api/admin/dashboard",
+      "expected": "HTTP 401",
+      "actual": "HTTP 401 {\"message\":\"Please log in to continue.\"}",
+      "status": "PASS",
+      "notes": "re-verified (first run: owasp-05)",
+      "evidence": {
+        "req": "GET /api/admin/dashboard (no cookie)",
+        "status": 401,
+        "body": "{\"message\":\"Please log in to continue.\"}"
+      }
+    },
+    {
+      "id": "A01-04",
+      "owasp": "A01",
+      "objective": "IDOR: attendee A must not read attendee B booking; body must leak nothing",
+      "steps": "Kasun's booking ID read by attendee@demo.com; compare with owner (control)",
+      "expected": "HTTP 404 and body only a generic message",
+      "actual": "Attacker HTTP 404 body={\"message\":\"Booking not found\"}; owner control HTTP 200; leaked markers: none",
+      "status": "PASS",
+      "notes": "Body verified: no private fields returned. 404 (not 403) also avoids confirming that the ID exists.",
+      "evidence": {
+        "req": "GET /api/bookings/<other user booking id>",
+        "status": 404,
+        "body": "{\"message\":\"Booking not found\"}",
+        "control": {
+          "status": 200
+        }
+      }
+    },
+    {
+      "id": "A01-05",
+      "owasp": "A01",
+      "objective": "Attendee cannot create events (role restriction)",
+      "steps": "POST /api/events as attendee with a valid event body",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You do not have permission to access this resource.\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "POST /api/events (attendee)",
+        "status": 403,
+        "body": "{\"message\":\"You do not have permission to access this resource.\"}"
+      }
+    },
+    {
+      "id": "A01-06",
+      "owasp": "A01",
+      "objective": "Attendee cannot call admin user-status endpoint",
+      "steps": "PATCH /api/admin/users/:id/status as attendee (own id, harmless value)",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You do not have permission to access this resource.\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "PATCH /api/admin/users/:id/status (attendee)",
+        "status": 403,
+        "body": "{\"message\":\"You do not have permission to access this resource.\"}"
+      }
+    },
+    {
+      "id": "A01-07",
+      "owasp": "A01",
+      "objective": "Attendee cannot use ticket check-in (organizer/admin only)",
+      "steps": "POST /api/tickets/check-in as attendee",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You do not have permission to access this resource.\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "POST /api/tickets/check-in (attendee)",
+        "status": 403,
+        "body": "{\"message\":\"You do not have permission to access this resource.\"}"
+      }
+    },
+    {
+      "id": "A01-08",
+      "owasp": "A01",
+      "objective": "Organizer cannot list all users (admin only)",
+      "steps": "GET /api/admin/users as organizer",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You do not have permission to access this resource.\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "GET /api/admin/users (organizer)",
+        "status": 403,
+        "body": "{\"message\":\"You do not have permission to access this resource.\"}"
+      }
+    },
+    {
+      "id": "A01-09",
+      "owasp": "A01",
+      "objective": "Positive control: organizer CAN reach organizer dashboard (proves 403s above are real role checks)",
+      "steps": "GET /api/organizer/dashboard as organizer",
+      "expected": "HTTP 200",
+      "actual": "HTTP 200",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "GET /api/organizer/dashboard (organizer)",
+        "status": 200
+      }
+    },
+    {
+      "id": "A01-10",
+      "owasp": "A01",
+      "objective": "Organizer 2 cannot edit Organizer 1's event",
+      "steps": "PATCH /api/events/:id as organizer2 (empty body so nothing changes even if allowed)",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You can only manage your own events\"}",
+      "status": "PASS",
+      "notes": "Throw-away event used. A 400 would mean the ownership check was skipped.",
+      "evidence": {
+        "req": "PATCH /api/events/:id (other organizer's event)",
+        "status": 403,
+        "body": "{\"message\":\"You can only manage your own events\"}"
+      }
+    },
+    {
+      "id": "A01-11",
+      "owasp": "A01",
+      "objective": "Organizer 2 cannot read Organizer 1's attendee list",
+      "steps": "GET /api/organizer/events/:id/attendees as organizer2",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You can only view attendees for your own events\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "GET /api/organizer/events/:id/attendees (other organizer)",
+        "status": 403,
+        "body": "{\"message\":\"You can only view attendees for your own events\"}"
+      }
+    },
+    {
+      "id": "A01-12",
+      "owasp": "A01",
+      "objective": "Organizer 2 cannot publish Organizer 1's event",
+      "steps": "POST /api/events/:id/publish as organizer2",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You can only manage your own events\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "POST /api/events/:id/publish (other organizer)",
+        "status": 403,
+        "body": "{\"message\":\"You can only manage your own events\"}"
+      }
+    },
+    {
+      "id": "A01-13",
+      "owasp": "A01",
+      "objective": "Organizer 2 cannot delete Organizer 1's event",
+      "steps": "DELETE /api/events/:id as organizer2 (throw-away event)",
+      "expected": "HTTP 403",
+      "actual": "HTTP 403 {\"message\":\"You can only manage your own events\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "DELETE /api/events/:id (other organizer)",
+        "status": 403,
+        "body": "{\"message\":\"You can only manage your own events\"}"
+      }
+    },
+    {
+      "id": "A01-14",
+      "owasp": "A01",
+      "objective": "Attendee cannot cancel another attendee's booking",
+      "steps": "Code review of cancelBooking (bookingController.js)",
+      "expected": "Ownership check",
+      "actual": "Code compares booking.attendeeId with req.user._id and returns 404 otherwise. NOT executed against live data because a vulnerability would cancel a real seeded booking.",
+      "status": "NOT TESTED",
+      "notes": "Static review only; no dynamic evidence.",
+      "evidence": {}
+    },
+    {
+      "id": "A01-15",
+      "owasp": "A01",
+      "objective": "Mass assignment: role cannot be changed through PATCH /api/auth/me",
+      "steps": "PATCH /api/auth/me with role=admin; then GET /api/auth/me",
+      "expected": "role remains attendee",
+      "actual": "PATCH HTTP 200; role after = attendee",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "PATCH /api/auth/me {role:\"admin\"}",
+        "status": 200,
+        "body": "{\"_id\":\"6b04a6fbf26b73745c454914\",\"id\":\"6b04a6fbf26b73745c454914\",\"name\":\"Demo Attendee\",\"email\":\"attendee@demo.com\",\"role\":\"attendee\",\"profileImage\":\"\",\"accountStatus\":\"active\",\"emailVerified\":true,\"favorites\":[\"6b04a6fbf26b73745c45492e\",\"6b04a6fbf26b73745c454932\"],\"createdAt\":\"2026-11-23T20:50:03.897Z\"}"
+      }
+    },
+    {
+      "id": "A01-16",
+      "owasp": "A01",
+      "objective": "Mass assignment: register cannot create an admin",
+      "steps": "POST /api/auth/register with role=admin",
+      "expected": "HTTP 400 (role limited to attendee/organizer)",
+      "actual": "HTTP 400 {\"message\":\"Validation failed\",\"errors\":{\"role\":\"Invalid option: expected one of \\\"attende…",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "POST /api/auth/register {role:\"admin\"}",
+        "status": 400,
+        "body": "{\"message\":\"Validation failed\",\"errors\":{\"role\":\"Invalid option: expected one of \\\"attendee\\\"|\\\"organizer\\\"\"}}"
+      }
+    },
+    {
+      "id": "A01-17",
+      "owasp": "A01",
+      "objective": "Self-registration with organizer role (design observation)",
+      "steps": "POST /api/auth/register with role=organizer",
+      "expected": "Documented behaviour",
+      "actual": "HTTP 201; new account role=organizer",
+      "status": "OBSERVATION",
+      "notes": "Anyone can become an organizer without approval. Not admin escalation, but organizers can create events/QR check-in; consider an approval flow.",
+      "evidence": {
+        "req": "POST /api/auth/register {role:\"organizer\"}",
+        "status": 201
+      }
+    },
+    {
+      "id": "A01-18",
+      "owasp": "A01",
+      "objective": "Forged / unsigned / malformed session tokens are rejected",
+      "steps": "GET /api/auth/me with (a) JWT signed with a wrong secret, (b) alg=none JWT, (c) garbage cookie",
+      "expected": "HTTP 401 for all three",
+      "actual": "wrong-secret=401, alg-none=401, garbage=401",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "GET /api/auth/me (forged cookies)",
+        "status": "401/401/401"
+      }
+    },
+    {
+      "id": "A01-19",
+      "owasp": "A01",
+      "objective": "Suspended account cannot log in",
+      "steps": "POST /api/auth/login suspended@demo.com",
+      "expected": "HTTP 403 (or 401)",
+      "actual": "HTTP 403 {\"message\":\"Your account is suspended. Contact support.\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "POST /api/auth/login (suspended user)",
+        "status": 403,
+        "body": "{\"message\":\"Your account is suspended. Contact support.\"}"
+      }
+    },
+    {
+      "id": "A02-01",
+      "owasp": "A02",
+      "objective": "Session cookie flags",
+      "steps": "Login; inspect Set-Cookie header (token value redacted)",
+      "expected": "HttpOnly + SameSite set; Secure on HTTPS/production",
+      "actual": "eventease_token=<redacted>; Max-Age=604800; Path=/; Expires=Tue, 01 Dec 2026 06:03:58 GMT; HttpOnly; SameSite=Lax  =>  HttpOnly=true, SameSite=Lax, Secure=false",
+      "status": "PASS",
+      "notes": "Secure is false in this development run: authController sets secure only when NODE_ENV=production (code reviewed). Must be verified in production deployment.",
+      "evidence": {
+        "req": "POST /api/auth/login → Set-Cookie",
+        "setCookie": "eventease_token=<redacted>; Max-Age=604800; Path=/; Expires=Tue, 01 Dec 2026 06:03:58 GMT; HttpOnly; SameSite=Lax"
+      }
+    },
+    {
+      "id": "A02-02",
+      "owasp": "A02",
+      "objective": "API responses do not expose password hashes, reset tokens or secrets",
+      "steps": "Scan JSON of login, /auth/me, /bookings/my, /events, /notifications for sensitive key names",
+      "expected": "No such keys",
+      "actual": "No passwordHash / reset-token / secret keys in any scanned response",
+      "status": "PASS",
+      "notes": "Key-name scan only; values not inspected.",
+      "evidence": {
+        "req": "multiple GETs",
+        "status": "n/a"
+      }
+    },
+    {
+      "id": "A02-03",
+      "owasp": "A02",
+      "objective": "JWT content and lifetime",
+      "steps": "Decode (not verify) the session JWT; list claim names only",
+      "expected": "Minimal claims; reasonable expiry",
+      "actual": "alg=HS256; claims=sub,iat,exp; lifetime=7 days",
+      "status": "PASS",
+      "notes": "Only the user id is stored (no email/role/PII). 7-day lifetime with no revocation list is long (see A07-05).",
+      "evidence": {
+        "req": "decode JWT",
+        "status": "n/a"
+      }
+    },
+    {
+      "id": "A02-04",
+      "owasp": "A02",
+      "objective": "Admin credentials must not be embedded in the browser bundle",
+      "steps": "Compare client/.env VITE_ADMIN_PASSWORD against the dev-served Login module and the production bundle in client/dist (values never printed)",
+      "expected": "Secret absent from anything sent to the browser",
+      "actual": "Admin password present in dev-server Login module: true. Fresh production build (vite build into a temp folder) contains the password: false; admin email: false. Existing client/dist: password false.",
+      "status": "PASS",
+      "notes": "Corrected after fresh-build check: Login.jsx only renders the quick-login block when import.meta.env.DEV, so Vite removes it (and the VITE_ADMIN_* values) from production bundles. Residual risk: in development the admin password is delivered to any browser that opens the dev server, so never expose the dev server beyond localhost.",
+      "evidence": {
+        "req": "static check",
+        "status": "n/a",
+        "servedHit": true,
+        "distHit": false
+      }
+    },
+    {
+      "id": "A03-02",
+      "owasp": "A03",
+      "objective": "NoSQL operator object in forgot-password email",
+      "steps": "POST /api/auth/forgot-password {\"email\":{\"$ne\":null}}",
+      "expected": "Clean 400 or generic 200; no server error",
+      "actual": "HTTP 500 {\"message\":\"email.includes is not a function\"}",
+      "status": "FAIL",
+      "notes": "Handler calls email.includes()/trim() on unvalidated input (no zod schema), producing an unhandled TypeError whose message is returned to the client.",
+      "evidence": {
+        "req": "POST /api/auth/forgot-password {email:{$ne:null}}",
+        "status": 500,
+        "body": "{\"message\":\"email.includes is not a function\"}"
+      }
+    },
+    {
+      "id": "A03-03",
+      "owasp": "A03",
+      "objective": "NoSQL operator object in reset-password token",
+      "steps": "POST /api/auth/reset-password {\"token\":{\"$ne\":null},\"password\":\"Abcd1234\"}",
+      "expected": "Clean 400; no server error",
+      "actual": "HTTP 500 {\"message\":\"The \\\"data\\\" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received an instance of Object\"}",
+      "status": "FAIL",
+      "notes": "Token is hashed with crypto before querying, so injection cannot match a user; failure mode is only an unhandled 500.",
+      "evidence": {
+        "req": "POST /api/auth/reset-password {token:{$ne:null}}",
+        "status": 500,
+        "body": "{\"message\":\"The \\\"data\\\" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received an instance of Object\"}"
+      }
+    },
+    {
+      "id": "A03-04",
+      "owasp": "A03",
+      "objective": "Type confusion in contact form (object instead of string name)",
+      "steps": "POST /api/contact {\"name\":{\"$ne\":1},...}",
+      "expected": "Clean 400; no server error",
+      "actual": "HTTP 500 {\"message\":\"name.trim is not a function\"}",
+      "status": "FAIL",
+      "notes": "contactController calls name.trim() without type checks.",
+      "evidence": {
+        "req": "POST /api/contact {name:{$ne:1}}",
+        "status": 500,
+        "body": "{\"message\":\"name.trim is not a function\"}"
+      }
+    },
+    {
+      "id": "A03-05",
+      "owasp": "A03",
+      "objective": "NoSQL operators in register are rejected (zod schema)",
+      "steps": "POST /api/auth/register with operator objects",
+      "expected": "HTTP 400",
+      "actual": "HTTP 400",
+      "status": "PASS",
+      "notes": "zod type validation blocks it.",
+      "evidence": {
+        "req": "POST /api/auth/register (operators)",
+        "status": 400,
+        "body": "{\"message\":\"Validation failed\",\"errors\":{\"name\":\"Invalid input: expected string, received object\",\"email\":\"Invalid input: expected string, received object\",\"password\":\"Invalid input: expected string, received object\"}}"
+      }
+    },
+    {
+      "id": "A03-06",
+      "owasp": "A03",
+      "objective": "Query-string operator injection on event search",
+      "steps": "GET /api/events?category[$ne]=zzz&city[$regex]=.* vs plain GET /api/events",
+      "expected": "Operators ignored / rejected; no error",
+      "actual": "HTTP 200 (8 results) vs plain HTTP 200 (8 results)",
+      "status": "PASS",
+      "notes": "Express 5 default \"simple\" query parser keeps keys flat, so operator syntax is not turned into objects.",
+      "evidence": {
+        "req": "GET /api/events?category[$ne]=…",
+        "status": 200
+      }
+    },
+    {
+      "id": "A03-07",
+      "owasp": "A03",
+      "objective": "javascript: URL in event banner is rejected",
+      "steps": "POST /api/events with bannerImage=javascript:alert(1)",
+      "expected": "HTTP 400",
+      "actual": "HTTP 400 {\"message\":\"Validation failed\",\"errors\":{\"bannerImage\":\"Enter a valid image URL\"}}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "POST /api/events {bannerImage:\"javascript:...\"}",
+        "status": 400,
+        "body": "{\"message\":\"Validation failed\",\"errors\":{\"bannerImage\":\"Enter a valid image URL\"}}"
+      }
+    },
+    {
+      "id": "A03-08",
+      "owasp": "A03",
+      "objective": "Server-side validation of profileImage URL",
+      "steps": "PATCH /api/auth/me {\"profileImage\":\"javascript:alert(1)\"} as QA user",
+      "expected": "HTTP 400 (only http/https allowed)",
+      "actual": "HTTP 200; stored value = javascript:alert(1)",
+      "status": "FAIL",
+      "notes": "Only the React form validates (Profile.jsx isHttpUrl); the API accepts any string. Currently rendered only after an isHttpUrl check, so no exploit today, but any new consumer would be exposed.",
+      "evidence": {
+        "req": "PATCH /api/auth/me {profileImage:\"javascript:...\"}",
+        "status": 200,
+        "body": "{\"_id\":\"6b0528cdff9375ca87c7a4a5\",\"id\":\"6b0528cdff9375ca87c7a4a5\",\"name\":\"QA Member5\",\"email\":\"qa.m5.mwuahdk0@example.com\",\"role\":\"organizer\",\"profileImage\":\"javascript:alert(1)\",\"accountStatus\":\"active\",\"emailVerified\":false,\"favorites\":[],\"createdAt\":\"2026-11-24T06:03:57.580Z\"}"
+      }
+    },
+    {
+      "id": "A03-09",
+      "owasp": "A03",
+      "objective": "Review comments (stored XSS surface) reachable for testing",
+      "steps": "Try GET /api/events/:id/reviews, GET /api/reviews, POST /api/reviews",
+      "expected": "A working review endpoint to test",
+      "actual": "GET /api/events/:id/reviews = 404; GET /api/reviews = 404 {\"message\":\"Event not found\"}; POST /api/reviews (no auth) = 401",
+      "status": "FAIL",
+      "notes": "Defect: reviewRoutes is mounted at /api/reviews but its handlers read req.params.id (an event id) that the mount path never provides, and the React app never calls reviews. Review XSS therefore could not be tested; the feature is unreachable.",
+      "evidence": {
+        "req": "GET /api/events/:id/reviews , GET /api/reviews",
+        "status": "404/404"
+      }
+    },
+    {
+      "id": "A05-01",
+      "owasp": "A05",
+      "objective": "Security headers on the API (Helmet)",
+      "steps": "GET /api/health; inspect response headers",
+      "expected": "Helmet headers present; X-Powered-By absent",
+      "actual": "present=content-security-policy, x-content-type-options, x-frame-options, strict-transport-security, referrer-policy, cross-origin-opener-policy, cross-origin-resource-policy, x-dns-prefetch-control; missing=none; x-powered-by=absent; CORP=cross-origin",
+      "status": "PASS",
+      "notes": "Cross-Origin-Resource-Policy is deliberately relaxed to cross-origin in app.js.",
+      "evidence": {
+        "req": "GET /api/health",
+        "status": 200,
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "content-security-policy": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+          "cross-origin-opener-policy": "same-origin",
+          "cross-origin-resource-policy": "cross-origin",
+          "referrer-policy": "no-referrer",
+          "strict-transport-security": "max-age=31536000; includeSubDomains",
+          "x-content-type-options": "nosniff",
+          "x-dns-prefetch-control": "off",
+          "x-frame-options": "SAMEORIGIN"
+        }
+      }
+    },
+    {
+      "id": "A05-02",
+      "owasp": "A05",
+      "objective": "Security headers on the frontend web server",
+      "steps": "GET http://localhost:5180/ (Vite dev server); inspect response headers",
+      "expected": "CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy",
+      "actual": "missing=content-security-policy, x-frame-options, x-content-type-options, referrer-policy",
+      "status": "FAIL",
+      "notes": "Measured against the Vite dev server only. The production host that serves client/dist must add these (clickjacking / CSP protection) - Helmet only protects the API. Confirmed by config: client/vercel.json (the documented production host) defines rewrites only and no headers block, so production will also lack CSP / X-Frame-Options.",
+      "evidence": {
+        "req": "GET http://localhost:5180/",
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "id": "A05-03",
+      "owasp": "A05",
+      "objective": "CORS must not trust arbitrary origins when credentials are enabled",
+      "steps": "Request with Origin: https://evil.example; check Access-Control-Allow-Origin / -Credentials (server NODE_ENV=development)",
+      "expected": "Untrusted origin NOT echoed",
+      "actual": "ACAO=https://evil.example; ACAC=true; preflight=204",
+      "status": "FAIL",
+      "notes": "app.js allows every origin whenever NODE_ENV !== \"production\". With credentials:true this means any website could make authenticated calls if the server is ever run without NODE_ENV=production. SameSite=Lax limits cross-site cookie sending, which reduces but does not remove the risk.",
+      "evidence": {
+        "req": "GET /api/auth/me Origin:https://evil.example",
+        "status": 401,
+        "headers": {
+          "access-control-allow-origin": "https://evil.example",
+          "access-control-allow-credentials": "true"
+        }
+      }
+    },
+    {
+      "id": "A05-04",
+      "owasp": "A05",
+      "objective": "Malformed JSON does not leak stack traces",
+      "steps": "POST /api/auth/login with body {\"email\": bad",
+      "expected": "HTTP 400, generic message, no stack",
+      "actual": "HTTP 400 {\"message\":\"Unexpected token 'b', \\\"{\\\"email\\\": bad\\\" is not valid JSON\"}",
+      "status": "PASS",
+      "notes": "No stack trace, but parser message is echoed (minor information disclosure).",
+      "evidence": {
+        "req": "POST /api/auth/login (malformed JSON)",
+        "status": 400,
+        "body": "{\"message\":\"Unexpected token 'b', \\\"{\\\"email\\\": bad\\\" is not valid JSON\"}"
+      }
+    },
+    {
+      "id": "A05-05",
+      "owasp": "A05",
+      "objective": "Unhandled 500 errors do not reveal internals",
+      "steps": "Re-use response of A03-02 (forgot-password with object email)",
+      "expected": "Generic message, no stack/internal names",
+      "actual": "HTTP 500 body={\"message\":\"email.includes is not a function\"}; stack trace present=false",
+      "status": "FAIL",
+      "notes": "errorHandler returns err.message for every 500, including internal JavaScript messages. Production should return a generic text for status>=500.",
+      "evidence": {
+        "req": "POST /api/auth/forgot-password {email:{$ne:null}}",
+        "status": 500,
+        "body": "{\"message\":\"email.includes is not a function\"}"
+      }
+    },
+    {
+      "id": "A05-06",
+      "owasp": "A05",
+      "objective": "Request body size limit enforced",
+      "steps": "POST 3 MB JSON to /api/chat (limit configured 2 MB)",
+      "expected": "HTTP 413",
+      "actual": "HTTP 413 {\"message\":\"request entity too large\"}",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "POST /api/chat (3 MB body)",
+        "status": 413,
+        "body": "{\"message\":\"request entity too large\"}"
+      }
+    },
+    {
+      "id": "A05-07",
+      "owasp": "A05",
+      "objective": "Sensitive files not served by the API",
+      "steps": "GET /.env, /server/.env, /package.json, /.git/config on port 5000",
+      "expected": "HTTP 404 for all",
+      "actual": "/.env=404, /server/.env=404, /package.json=404, /.git/config=404",
+      "status": "PASS",
+      "notes": "",
+      "evidence": {
+        "req": "GET sensitive paths",
+        "status": "/.env=404 /server/.env=404 /package.json=404 /.git/config=404"
+      }
+    },
+    {
+      "id": "A05-08",
+      "owasp": "A05",
+      "objective": ".env files are excluded from Git",
+      "steps": "git check-ignore on server/.env and client/.env; git ls-files; git log history for those paths",
+      "expected": "Ignored, untracked, never committed",
+      "actual": "check-ignore: .gitignore:3:.env\tserver/.env | .gitignore:3:.env\tclient/.env; tracked env files: client/.env.example, server/.env.example; history commits touching them: none",
+      "status": "PASS",
+      "notes": "Only .env.example is tracked.",
+      "evidence": {
+        "req": "git commands",
+        "status": "n/a"
+      }
+    },
+    {
+      "id": "A07-01",
+      "owasp": "A07",
+      "objective": "Brute-force protection / rate limiting on login",
+      "steps": "20 consecutive wrong-password logins against the QA test account only (never a real/demo user), then one correct login",
+      "expected": "Throttling (HTTP 429) or lockout before 20 attempts",
+      "actual": "statuses: 401×20; correct login after the burst = HTTP 200",
+      "status": "FAIL",
+      "notes": "express-rate-limit is listed in server/package.json but never imported (grep over server/src returns no usage). No lockout either: the correct password still works after the burst.",
+      "evidence": {
+        "req": "20× POST /api/auth/login (wrong password)",
+        "status": "401,401,401,401,401,401,401,401,401,401,401,401,401,401,401,401,401,401,401,401"
+      }
+    },
+    {
+      "id": "A07-02",
+      "owasp": "A07",
+      "objective": "Weak password rules on registration",
+      "steps": "Register with: \"123\", \"12345678\", \"abcdefgh\", 74-char password",
+      "expected": "All rejected with HTTP 400",
+      "actual": "too short→400; digits only→400; letters only→400; >72 chars→400",
+      "status": "PASS",
+      "notes": "Rules: 8–72 chars, at least one letter and one number.",
+      "evidence": {
+        "req": "POST /api/auth/register (weak passwords)",
+        "status": "too short→400 digits only→400 letters only→400 >72 chars→400"
+      }
+    },
+    {
+      "id": "A07-03",
+      "owasp": "A07",
+      "objective": "Common/breached passwords are rejected",
+      "steps": "Register with the very common password \"password1\" (QA account)",
+      "expected": "HTTP 400 (blocklist) ",
+      "actual": "HTTP 201",
+      "status": "FAIL",
+      "notes": "Only composition rules exist; no common-password blocklist, no special-character or breach check (NIST SP 800-63B recommends a blocklist).",
+      "evidence": {
+        "req": "POST /api/auth/register (password1)",
+        "status": 201
+      }
+    },
+    {
+      "id": "A07-04",
+      "owasp": "A07",
+      "objective": "User enumeration",
+      "steps": "Compare responses: register existing email; login wrong password vs unknown email",
+      "expected": "Identical, non-revealing responses",
+      "actual": "register existing → HTTP 400 \"This email is already registered\"; login wrong pw → \"Incorrect email or password\"; login unknown email → \"Incorrect email or password\"",
+      "status": "FAIL",
+      "notes": "Login is generic (good) but registration confirms which emails exist (low severity, common trade-off).",
+      "evidence": {
+        "req": "register/login comparison",
+        "status": "400/401/401"
+      }
+    },
+    {
+      "id": "A07-05",
+      "owasp": "A07",
+      "objective": "Session token is invalidated by logout",
+      "steps": "Login, copy cookie, POST /api/auth/logout, replay the old cookie on GET /api/auth/me",
+      "expected": "HTTP 401 after logout",
+      "actual": "HTTP 200 after replaying the pre-logout cookie",
+      "status": "FAIL",
+      "notes": "Logout only clears the browser cookie; the JWT stays valid for its full 7 days (stateless, no server-side revocation or token version).",
+      "evidence": {
+        "req": "replay cookie after logout",
+        "status": 200
+      }
+    },
+    {
+      "id": "A07-06",
+      "owasp": "A07",
+      "objective": "Forgot-password does not reveal whether the email exists",
+      "steps": "POST forgot-password for QA account vs non-existent email",
+      "expected": "Identical response",
+      "actual": "existing: HTTP 200 \"If that email exists, a reset link has been sent.\"; unknown: HTTP 200 \"If that email exists, a reset link has been sent.\"",
+      "status": "PASS",
+      "notes": "Run against a private second API instance on port 5099 (same code and DB) so the reset link logged to its console could be read.",
+      "evidence": {
+        "req": "forgot-password ×2",
+        "status": "200/200"
+      }
+    },
+    {
+      "id": "A07-07",
+      "owasp": "A07",
+      "objective": "Reset-token lifecycle: weak password rejected, invalid token rejected, one-time use, old password revoked",
+      "steps": "Request reset for QA account; read token from private instance console; test weak pw, bogus token, valid reset, token re-use, old/new password login",
+      "expected": "weak=400, bogus=400, valid=200, reuse=400, old pw=401, new pw=200",
+      "actual": "weak=400, bogus=400, valid=200, reuse=400, oldPw=401, newPw=200",
+      "status": "PASS",
+      "notes": "Token is 32 random bytes, only its SHA-256 is stored, 1-hour expiry (code reviewed). Side note: the full reset URL is written to the server console (acceptable for dev, must be replaced by e-mail in production).",
+      "evidence": {
+        "req": "reset flow",
+        "status": "see actual"
+      }
+    }
+  ],
+  "partial": false
+}

@@ -1,0 +1,542 @@
+{
+  "ranAt": "2026-11-24T06:09:33.720Z",
+  "axe": "axe-core 4.10.2",
+  "rows": [
+    {
+      "key": "Home (visitor)",
+      "url": "/",
+      "file": "usability-01-home-visitor.png",
+      "mobile": false,
+      "loadMs": 4471,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Discover Events.\nCreate Memories.",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 42,
+          "sample": ".bg-orange"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "div:nth-child(2) > h4"
+        }
+      ]
+    },
+    {
+      "key": "Explore events",
+      "url": "/events",
+      "file": "usability-02-explore-events.png",
+      "mobile": false,
+      "loadMs": 1541,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Explore Events",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 19,
+          "sample": ".bg-orange"
+        }
+      ]
+    },
+    {
+      "key": "Event details (visitor)",
+      "url": "/events/6b04a6fbf26b73745c45492c",
+      "file": "usability-03-event-details.png",
+      "mobile": false,
+      "loadMs": 2074,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "CodeCamp: Web Dev Bootcamp",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 2,
+          "sample": ".bg-orange"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "div:nth-child(2) > h4"
+        }
+      ]
+    },
+    {
+      "key": "Login – empty submit",
+      "url": "/login",
+      "file": "usability-04-login-validation.png",
+      "mobile": false,
+      "loadMs": 1959,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Welcome back",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 2,
+          "sample": ".bg-orange"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "div:nth-child(2) > h4"
+        }
+      ]
+    },
+    {
+      "key": "Signup – empty submit",
+      "url": "/signup",
+      "file": "usability-05-signup-validation.png",
+      "mobile": false,
+      "loadMs": 2125,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Create your account",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 2,
+          "sample": ".px-3"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "div:nth-child(2) > h4"
+        }
+      ]
+    },
+    {
+      "key": "Forgot password",
+      "url": "/forgot-password",
+      "file": "usability-06-forgot-password.png",
+      "mobile": false,
+      "loadMs": 2022,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Forgot password?",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 1,
+          "sample": ".px-3"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "div:nth-child(2) > h4"
+        }
+      ]
+    },
+    {
+      "key": "404 page",
+      "url": "/this-page-does-not-exist",
+      "file": "usability-07-not-found.png",
+      "mobile": false,
+      "loadMs": 2099,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "",
+      "h1Count": 0,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 1,
+          "sample": ".px-3"
+        },
+        {
+          "id": "page-has-heading-one",
+          "impact": "moderate",
+          "help": "Page should contain a level-one heading",
+          "nodes": 1,
+          "sample": "html"
+        }
+      ]
+    },
+    {
+      "key": "Attendee dashboard",
+      "url": "/attendee",
+      "file": "usability-08-attendee-dashboard.png",
+      "mobile": false,
+      "loadMs": 2221,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Hi, Demo",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 2,
+          "sample": "tr:nth-child(1) > td:nth-child(5) > .bg-teal\\/15.text-teal.inline-block"
+        }
+      ]
+    },
+    {
+      "key": "My tickets",
+      "url": "/attendee/tickets",
+      "file": "usability-09-attendee-my-tickets.png",
+      "mobile": false,
+      "loadMs": 2211,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "My tickets",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 6,
+          "sample": ".right-4.bg-white.top-4 > .bg-sky\\/15.text-sky.inline-block"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "article:nth-child(1) > .p-5.sm\\:grid-cols-\\[1fr_auto\\].grid > .space-y-2 > h3"
+        }
+      ]
+    },
+    {
+      "key": "Saved events",
+      "url": "/attendee/saved",
+      "file": "usability-10-attendee-saved-events.png",
+      "mobile": false,
+      "loadMs": 2161,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Saved events",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 6,
+          "sample": "article:nth-child(1) > a > .space-y-1\\.5.p-4 > .pt-1.items-end.justify-between > .tracking-wide.text-orange.text-xs"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "article:nth-child(1) > a > .space-y-1\\.5.p-4 > h3"
+        }
+      ]
+    },
+    {
+      "key": "Profile",
+      "url": "/profile",
+      "file": "usability-11-profile.png",
+      "mobile": false,
+      "loadMs": 1990,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Profile settings",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 1,
+          "sample": ".text-center > .inline-block.py-1.capitalize"
+        }
+      ]
+    },
+    {
+      "key": "Organizer dashboard",
+      "url": "/organizer",
+      "file": "usability-12-organizer-dashboard.png",
+      "mobile": false,
+      "loadMs": 2474,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Organizer dashboard",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 5,
+          "sample": ".px-5"
+        }
+      ]
+    },
+    {
+      "key": "Manage events",
+      "url": "/organizer/events",
+      "file": "usability-13-organizer-manage-events.png",
+      "mobile": false,
+      "loadMs": 1964,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Manage events",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 6,
+          "sample": ".px-5"
+        }
+      ]
+    },
+    {
+      "key": "Create event – empty submit",
+      "url": "/organizer/events/new",
+      "file": "usability-14-organizer-create-event-validation.png",
+      "mobile": false,
+      "loadMs": 2067,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Create event",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": []
+    },
+    {
+      "key": "Event attendees",
+      "url": "/organizer/events/6b04a6fbf26b73745c45493a/attendees",
+      "file": "usability-15-organizer-attendees.png",
+      "mobile": false,
+      "loadMs": 2050,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Attendees",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "h3"
+        }
+      ]
+    },
+    {
+      "key": "Event analytics",
+      "url": "/organizer/events/6b04a6fbf26b73745c45493a/analytics",
+      "file": "usability-16-organizer-analytics.png",
+      "mobile": false,
+      "loadMs": 1929,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Event analytics",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": []
+    },
+    {
+      "key": "QR check-in",
+      "url": "/organizer/checkin",
+      "file": "usability-17-organizer-checkin.png",
+      "mobile": false,
+      "loadMs": 1792,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "QR check-in",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": []
+    },
+    {
+      "key": "Home (mobile 375px)",
+      "url": "/",
+      "file": "usability-18-mobile-home.png",
+      "mobile": true,
+      "loadMs": 2606,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Discover Events.\nCreate Memories.",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 41,
+          "sample": ".md\\:grid-cols-3 > article:nth-child(1) > a > .space-y-1\\.5.p-4 > .pt-1.items-end.justify-between > .text-sky.tracking-wide.text-xs"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "div:nth-child(2) > h4"
+        }
+      ]
+    },
+    {
+      "key": "Explore (mobile 375px)",
+      "url": "/events",
+      "file": "usability-19-mobile-explore.png",
+      "mobile": true,
+      "loadMs": 2341,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Explore Events",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 18,
+          "sample": "article:nth-child(1) > .min-w-0.gap-4.flex-1 > .flex-col.min-w-0.py-1 > div:nth-child(1) > .text-slate-400.text-xs"
+        }
+      ]
+    },
+    {
+      "key": "Event details (mobile 375px)",
+      "url": "/events/6b04a6fbf26b73745c45492c",
+      "file": "usability-20-mobile-event-details.png",
+      "mobile": true,
+      "loadMs": 2115,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "CodeCamp: Web Dev Bootcamp",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 1,
+          "sample": ".tracking-wide"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "div:nth-child(2) > h4"
+        }
+      ]
+    },
+    {
+      "key": "Login (mobile 375px)",
+      "url": "/login",
+      "file": "usability-21-mobile-login.png",
+      "mobile": true,
+      "loadMs": 2245,
+      "title": "EventEase – Discover Events. Create Memories.",
+      "h1": "Welcome back",
+      "h1Count": 1,
+      "overflowX": false,
+      "skipLink": false,
+      "landmarkMain": true,
+      "imgsNoAlt": 0,
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": 1,
+          "sample": ".text-slate-500.text-xs"
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "help": "Heading levels should only increase by one",
+          "nodes": 1,
+          "sample": "div:nth-child(2) > h4"
+        }
+      ]
+    }
+  ]
+}
