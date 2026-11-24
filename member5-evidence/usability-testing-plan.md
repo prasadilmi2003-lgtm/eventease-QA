@@ -94,3 +94,12 @@ Rate each statement from **1 = Strongly disagree** to **5 = Strongly agree**.
 2. Fill the two CSV files with the real observations and answers.
 3. Run `node usability-kit/calculate-sus.mjs usability-kit/sus-responses.csv`, then write `usability-testing-results.md` from the genuine numbers.
 4. Optionally add 1–2 real session photos/screenshots (with consent) to `screenshots/`.
+
+## 12. Collecting data with the form (`usability-kit/sus-form.html`)
+1. Double-click `sus-form.html` (opens in Chrome). Everything stays in that browser; nothing is uploaded.
+2. Per participant: enter an ID (P1…), tick consent, choose the task set, fill the task table (facilitator) and the 10 SUS statements (participant), then **Save participant**.
+3. At the end press **Export SUS CSV** and **Export tasks CSV**; move both files into `usability-kit/`.
+4. Run `node calculate-sus.mjs sus-responses.csv`.
+
+**Remote / separate laptops:** each person can open the same form on their own computer and send you their two exported CSV files. Merge by pasting the data rows under one header row, keeping the IDs unique.
+**Limitation to state in the report:** if the participants are group members who already know the app, say so; they are not first-time users and results are biased toward ease of use.

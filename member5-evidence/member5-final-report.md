@@ -81,3 +81,8 @@ Expert inspection plus a scripted task walkthrough (7 of 7 runnable tasks comple
 | Usability walkthrough | `usability-01` … `usability-21` (+ `04a`, `05a`) | Real Chrome (Playwright), desktop and 375 px mobile |
 | Automated task walkthrough | `usability-auto-T1` … `T7`, `usability-auto-keyboard-first-main-focus.png` | Real Chrome driven by a script |
 
+
+## 12. Usability testing status statement (use this wording in the submission)
+> **Participant-based usability testing and the SUS score were planned but not performed.** A complete plan, task list, SUS questionnaire, data-collection form (`usability-kit/sus-form.html`) and scoring script were prepared and verified, but no real participants took part, so no task-success, time-on-task or SUS figures are reported. In place of user data, three genuine activities were carried out and are reported separately: an expert heuristic and accessibility inspection of 21 pages (`usability-heuristic-evaluation.md`), a scripted task walkthrough in Chrome of 7 runnable tasks (`usability-automated-task-walkthrough.md`) and a keyboard-navigation check. These show that the workflows can be completed and expose accessibility defects (BUG-011, 012, 013, 016, 017, 018) but they do not measure user satisfaction.
+
+**If real sessions are run later:** export the two CSV files from the form, run `node usability-kit/calculate-sus.mjs usability-kit/sus-responses.csv`, then replace the statement above with the real participant count and results (and create `usability-testing-results.md`).
