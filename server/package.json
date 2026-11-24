@@ -11,6 +11,7 @@
     "set-admin": "node src/utils/setAdmin.js",
     "test": "node src/utils/testSuite.js",
     "test:unit": "vitest run --coverage --coverage.include=src/controllers/authController.js",
+    "test:blackbox": "vitest run tests/blackbox.register.test.js tests/blackbox.booking.test.js",
     "test:bdd": "cucumber-js --import features/step_definitions/*.js --format progress --format html:cucumber-report.html"
   },
   "dependencies": {
