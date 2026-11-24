@@ -39,12 +39,12 @@
 
 | Metric | Value |
 |---|---|
-| Total bugs logged | **16** |
-| Critical / High / Medium / Low | 0 / 2 / 7 / 7 |
-| Priority P1 / P2 / P3 | 3 / 6 / 7 |
-| By source | Security testing 10 · accessibility & usability 4 · SonarQube 2 |
-| Status | New 16 · Fixed 0 · Closed 0 (no code was changed) |
-| Defect density (all 16 / 6.697 KLOC) | 2.4 bugs per KLOC |
+| Total bugs logged | **18** |
+| Critical / High / Medium / Low | 0 / 2 / 7 / 9 |
+| Priority P1 / P2 / P3 | 3 / 6 / 9 |
+| By source | Security testing 10 · accessibility & usability 6 · SonarQube 2 |
+| Status | New 18 · Fixed 0 · Closed 0 (no code was changed) |
+| Defect density (all 18 / 6.697 KLOC) | 2.7 bugs per KLOC |
 | Security-only density (10 / 6.697 KLOC) | 1.5 per KLOC |
 | Root-cause analyses completed | 7 (`root-cause-analysis.md`) |
 
@@ -74,6 +74,8 @@
 | Heading-order failures | 11 pages |
 | Pages without skip link | 21 of 21 |
 | Horizontal overflow at 375 px | 0 of 4 pages |
+| Scripted task walkthrough | 7 of 7 runnable tasks completable (T6 not run), shortest paths 2-4 clicks; this is not a participant success rate |
+| Keyboard checks | 12 Tab presses to reach main content; focus ring missing on 4 Home search controls; 3 duplicate Tab stops |
 | **Participant task success rate** | **n/a – no participant sessions yet** |
 | **SUS score** | **n/a – no genuine responses yet** |
 | Time on task | n/a |

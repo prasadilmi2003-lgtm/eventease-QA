@@ -1,0 +1,272 @@
+[
+ {
+  "page": "/",
+  "tag": "A",
+  "label": "EventEase",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 1
+ },
+ {
+  "page": "/",
+  "tag": "A",
+  "label": "Find Events",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 2
+ },
+ {
+  "page": "/",
+  "tag": "A",
+  "label": "Categories",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 3
+ },
+ {
+  "page": "/",
+  "tag": "A",
+  "label": "About",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 4
+ },
+ {
+  "page": "/",
+  "tag": "A",
+  "label": "Contact",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 5
+ },
+ {
+  "page": "/",
+  "tag": "A",
+  "label": "Create an Event",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 6
+ },
+ {
+  "page": "/",
+  "tag": "BUTTON",
+  "label": "Create an Event",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(255, 255, 255)",
+  "n": 7
+ },
+ {
+  "page": "/",
+  "tag": "A",
+  "label": "Log in",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 8
+ },
+ {
+  "page": "/",
+  "tag": "BUTTON",
+  "label": "Log in",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 9
+ },
+ {
+  "page": "/",
+  "tag": "A",
+  "label": "Sign up",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 10
+ },
+ {
+  "page": "/",
+  "tag": "BUTTON",
+  "label": "Sign up",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(255, 255, 255)",
+  "n": 11
+ },
+ {
+  "page": "/",
+  "tag": "INPUT",
+  "label": "Event name",
+  "outline": false,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 12
+ },
+ {
+  "page": "/",
+  "tag": "SELECT",
+  "label": "Category",
+  "outline": false,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 13
+ },
+ {
+  "page": "/",
+  "tag": "INPUT",
+  "label": "Date",
+  "outline": false,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 14
+ },
+ {
+  "page": "/",
+  "tag": "INPUT",
+  "label": "Date",
+  "outline": false,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 15
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "EventEase",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 1
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "Find Events",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 2
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "Categories",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 3
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "About",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 4
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "Contact",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 5
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "Create an Event",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 6
+ },
+ {
+  "page": "/login",
+  "tag": "BUTTON",
+  "label": "Create an Event",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(255, 255, 255)",
+  "n": 7
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "Log in",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 8
+ },
+ {
+  "page": "/login",
+  "tag": "BUTTON",
+  "label": "Log in",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(30, 42, 82)",
+  "n": 9
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "Sign up",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(11, 18, 48)",
+  "n": 10
+ },
+ {
+  "page": "/login",
+  "tag": "BUTTON",
+  "label": "Sign up",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(255, 255, 255)",
+  "n": 11
+ },
+ {
+  "page": "/login",
+  "tag": "INPUT",
+  "label": "",
+  "outline": false,
+  "shadow": true,
+  "border": "oklab(0.640578 0.0652445 -0.164577)",
+  "n": 12
+ },
+ {
+  "page": "/login",
+  "tag": "INPUT",
+  "label": "",
+  "outline": false,
+  "shadow": true,
+  "border": "oklab(0.719179 0.0405666 -0.11518)",
+  "n": 13
+ },
+ {
+  "page": "/login",
+  "tag": "A",
+  "label": "Forgot password?",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(124, 58, 237)",
+  "n": 14
+ },
+ {
+  "page": "/login",
+  "tag": "BUTTON",
+  "label": "Log in",
+  "outline": true,
+  "shadow": false,
+  "border": "rgb(255, 255, 255)",
+  "n": 15
+ }
+]

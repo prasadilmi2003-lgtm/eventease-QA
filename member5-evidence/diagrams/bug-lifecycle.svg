@@ -62,8 +62,8 @@
 
     <rect x="40" y="440" width="420" height="130" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
     <g font-size="13" fill="#0f172a">
-      <text x="56" y="464" font-weight="700">Current position of the 16 reported bugs</text>
-      <text x="56" y="488">- New: BUG-001 ... BUG-016 (all 16)</text>
+      <text x="56" y="464" font-weight="700">Current position of the 18 reported bugs</text>
+      <text x="56" y="488">- New: BUG-001 ... BUG-018 (all 18)</text>
       <text x="56" y="508">- No code was changed by Member 5, so none is</text>
       <text x="56" y="526">  Fixed / Retest / Verified / Closed yet.</text>
       <text x="56" y="548">Green arrows = QA exit path; red = failed retest</text>

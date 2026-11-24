@@ -39,9 +39,11 @@
 | BUG-014 | Email regex has quadratic backtracking (ReDoS) | Medium | P2 | New | SonarQube S8786 + timing |
 | BUG-015 | Hard-coded demo password in seed/test/mock code | Low | P3 | New | SonarQube S2068 |
 | BUG-016 | Mobile: floating AI-chat button overlaps the Search button | Low | P3 | New | UX walkthrough |
+| BUG-017 | No visible keyboard focus indicator on the Home search fields | Low | P3 | New | Automated keyboard check |
+| BUG-018 | Navbar buttons nested inside links create duplicate Tab stops | Low | P3 | New | Automated keyboard check |
 
-**By severity:** High 2 · Medium 7 · Low 7 · Critical 0 · **Total 16**.
-**By source:** security tests 10 · accessibility/usability 4 · SonarQube 2.
+**By severity:** High 2 · Medium 7 · Low 9 · Critical 0 · **Total 18**.
+**By source:** security tests 10 · accessibility/usability 6 · SonarQube 2.
 
 ## 3. Detailed entries
 
@@ -144,6 +146,19 @@
 ### BUG-016 — Mobile: AI-chat button overlaps Search
 - **Description:** At 375 px width the floating AI-assistant button sits on top of the right end of the hero "Search" button.
 - **Severity / Priority:** Low / P3 · **Status:** New · **Evidence:** `screenshots/usability-18-mobile-home.png`
+
+### BUG-017 — No visible focus indicator on the Home search fields
+- **Description:** When tabbing through the Home page, links and buttons show a focus outline, but the hero search controls (Event name, Category, Date, Location) show no outline or ring (WCAG 2.4.7). The login inputs do show a ring.
+- **Steps:** Open Home, press Tab 12 times; screenshot the focused control. The automated check inspected the first 15 Tab stops on `/` and `/login`.
+- **Expected:** A visible focus indicator on every focused control. **Actual:** none on the 4 hero search controls.
+- **Severity / Priority:** Low / P3 · **Status:** New
+- **Evidence:** `screenshots/usability-auto-keyboard-first-main-focus.png`, `raw/keyboard-focus-check.json`
+
+### BUG-018 — Buttons nested inside links create duplicate Tab stops
+- **Description:** In the navbar "Create an Event", "Log in" and "Sign up" are each a link that wraps a button, so each takes two Tab presses (an `A` then a `BUTTON`). Interactive content inside a link is invalid HTML and is announced twice by screen readers. It also makes the Home page need 12 Tab presses before the first page control instead of 9.
+- **Steps:** Press Tab repeatedly on Home or `/login` and record the focused element.
+- **Expected:** One stop per action. **Actual:** stops 6–11 are A, BUTTON, A, BUTTON, A, BUTTON.
+- **Severity / Priority:** Low / P3 · **Status:** New · **Evidence:** `raw/keyboard-focus-check.json`
 
 ## 4. Items reviewed and deliberately **not** logged as bugs
 

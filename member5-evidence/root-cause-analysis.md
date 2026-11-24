@@ -2,7 +2,7 @@
 
 **Member 5 – Security & Quality Assurance (EC4206 Section 3.8)**
 
-Seven of the sixteen bugs in `bug-register.md` were selected because they are the most significant (security impact, a broken feature, or a repeated pattern). Each "why" is backed by code or test output that was actually inspected. Where a cause is a **process inference** (we cannot see the team's discussions), it is marked *(inferred)*.
+Seven of the eighteen bugs in `bug-register.md` were selected because they are the most significant (security impact, a broken feature, or a repeated pattern). Each "why" is backed by code or test output that was actually inspected. Where a cause is a **process inference** (we cannot see the team's discussions), it is marked *(inferred)*.
 
 ---
 

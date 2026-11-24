@@ -33,11 +33,11 @@ Bugs are recorded in `bug-register.md` (one row and one detail block per bug, wi
 3. Severity sets the response target: Critical within 24 h; High within the current sprint; Medium next sprint; Low backlog.
 4. A Rejected or Deferred decision needs a written reason in the register.
 
-## 4. Current status of the 16 registered bugs
+## 4. Current status of the 18 registered bugs
 
 | State | Count | Bugs |
 |---|---|---|
-| New | 16 | BUG-001 … BUG-016 |
+| New | 18 | BUG-001 … BUG-018 |
 | Assigned / Open / In Progress / Fixed / Retest / Verified / Closed / Reopened / Rejected / Deferred | 0 | — |
 
 **Suggested first moves (for the team to decide):** assign BUG-001, BUG-002 and BUG-010 (P1) first, because each has a small, well-defined fix.

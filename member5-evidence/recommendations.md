@@ -28,7 +28,7 @@
 | R10 | Validate `profileImage` on the server (http/https only, max length). | BUG-005 |
 | R11 | Reject common passwords (blocklist or `zxcvbn`), per NIST SP 800-63B. | BUG-007 |
 | R12 | Make the registration response non-revealing (generic message, e-mail verification) if enumeration matters. | BUG-008 |
-| R13 | Add a skip-to-content link; fix heading order; add an `<h1>` to the 404 page; resolve the chat-button overlap on mobile. | BUG-012, 013, 016 |
+| R13 | Add a skip-to-content link; fix heading order; add an `<h1>` to the 404 page; resolve the chat-button overlap on mobile; give the Home search controls a visible `focus-visible` ring; render navbar actions as a link or a button, not a button inside a link. | BUG-012, 013, 016, 017, 018 |
 | R14 | Do not seed the shared-demo-password accounts when `NODE_ENV=production`; keep the demo password out of source (use env/seed config). | BUG-015 |
 | R15 | Consider an approval step for self-registered **organizers** (currently anyone can pick the role). | Observation A01-17 |
 | R16 | Add a confirmation step (ticket summary) before a booking is submitted. | UX-06 |
