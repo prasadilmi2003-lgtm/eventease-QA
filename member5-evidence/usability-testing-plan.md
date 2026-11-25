@@ -2,7 +2,7 @@
 
 **Member 5 – Security & Quality Assurance (EC4206 Section 3.7 / usability testing)**
 
-> **Status: plan and materials are ready. Participant sessions have NOT been run.** No participant, response or SUS score exists yet, so `usability-testing-results.md` has deliberately not been created. The expert evaluation that *was* carried out on the real application is in `usability-heuristic-evaluation.md`.
+> **Status: the SUS questionnaire in this plan was completed by five participants; results are in `usability-testing-results.md` (mean SUS 73.5).** Task-level observations (times, errors, assistance), participant roles, dates and consent records were not recorded, so the task table in section 5 and the observation sheet in section 10 were not used. The expert evaluation is in `usability-heuristic-evaluation.md`.
 
 ## 1. Objectives
 1. Check that a first-time **attendee** can find an event, understand tickets and see their booking without help.
@@ -89,11 +89,9 @@ Rate each statement from **1 = Strongly disagree** to **5 = Strongly agree**.
 | T6 | | | | | |
 | T7 | | | | | |
 
-## 11. What the team still has to do
-1. Recruit ≥ 5 participants and run the sessions (consent required).
-2. Fill the two CSV files with the real observations and answers.
-3. Run `node usability-kit/calculate-sus.mjs usability-kit/sus-responses.csv`, then write `usability-testing-results.md` from the genuine numbers.
-4. Optionally add 1–2 real session photos/screenshots (with consent) to `screenshots/`.
+## 11. Status
+1. Five participants completed the SUS questionnaire; scores were checked with `usability-kit/calculate-sus.mjs` (answers in `usability-kit/sus-responses.csv`).
+2. Task observations were not recorded. To strengthen the study, repeat with the observation sheet in section 10.
 
 ## 12. Collecting data with the form (`usability-kit/sus-form.html`)
 1. Double-click `sus-form.html` (opens in Chrome). Everything stays in that browser; nothing is uploaded.

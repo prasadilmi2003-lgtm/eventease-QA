@@ -43,7 +43,7 @@
 | Critical / High / Medium / Low | 0 / 2 / 7 / 9 |
 | Priority P1 / P2 / P3 | 3 / 6 / 9 |
 | By source | Security testing 10 · accessibility & usability 6 · SonarQube 2 |
-| Status | New 18 · Fixed 0 · Closed 0 (no code was changed) |
+| Status | New 17 · Closed 1 (BUG-001 fixed in commit `e7c406c`, retest passed) |
 | Defect density (all 18 / 6.697 KLOC) | 2.7 bugs per KLOC |
 | Security-only density (10 / 6.697 KLOC) | 1.5 per KLOC |
 | Root-cause analyses completed | 7 (`root-cause-analysis.md`) |
@@ -76,9 +76,9 @@
 | Horizontal overflow at 375 px | 0 of 4 pages |
 | Scripted task walkthrough | 7 of 7 runnable tasks completable (T6 not run), shortest paths 2-4 clicks; this is not a participant success rate |
 | Keyboard checks | 12 Tab presses to reach main content; focus ring missing on 4 Home search controls; 3 duplicate Tab stops |
-| **Participant task success rate** | **n/a – no participant sessions yet** |
-| **SUS score** | **n/a – no genuine responses yet** |
-| Time on task | n/a |
+| Participant task success rate | not recorded |
+| **SUS score (5 participants)** | **73.5 / 100** (median 77.5; range 65.0 - 80.0; SD 6.8). Above the 68 benchmark; scores P1 80.0, P2 65.0, P3 77.5, P4 77.5, P5 67.5 |
+| Time on task | not recorded |
 
 ## 6. Test automation / coverage of the project's own tests
 - `npm test` in `server` runs one custom script (`testSuite.js`) of happy-path functional checks; it has no negative/security/abuse cases and no coverage instrumentation (hence SonarQube coverage 0 %).
@@ -92,5 +92,5 @@
 | Security – components | 3 high advisories | **Needs improvement** |
 | Reliability | One unreachable feature (reviews); 500s on malformed input | **Fair** |
 | Maintainability | Sonar A, 0.4 % duplication, but 0 % coverage | **Good (testing gap)** |
-| Usability / accessibility | Clear validation, responsive; contrast & heading issues; users untested | **Fair (unmeasured)** |
+| Usability / accessibility | Mean SUS 73.5 (n = 5); clear validation, responsive; contrast, focus and heading issues | **Good perceived usability; accessibility needs work** |
 | Performance efficiency | Not measured by Member 5 (JMeter belongs to Member 4) | **n/a** |

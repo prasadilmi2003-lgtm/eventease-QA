@@ -1,6 +1,6 @@
 # Recommendations — EventEase
 
-**Member 5 – Security & Quality Assurance (EC4206 Section 3.10)** · Every item points to the evidence that justifies it. Nothing below has been implemented by Member 5 (the application code was left untouched); each is a proposal for the team.
+**Member 5 – Security & Quality Assurance (EC4206 Section 3.10)** · Every item points to the evidence that justifies it. Only R1 (login rate limiting, BUG-001) has been implemented and verified by Member 5; the rest are proposals for the team.
 
 ## 1. Fix first (P1 — small effort, high value)
 
@@ -39,7 +39,7 @@
 2. **CI pipeline (GitHub Actions)** on every pull request: `npm ci`, `npm audit --audit-level=high`, lint (`oxlint`), unit/API tests, SonarQube scan with a "no new bugs/vulnerabilities" gate, and axe on key pages.
 3. **Coverage.** Generate a coverage report so SonarQube shows a real figure (0 % today); target ≥ 60 % on controllers first.
 4. **Definition of done** gets three lines: input validated with a schema; abuse case considered (rate limit, auth); accessibility contrast checked.
-5. **Complete the usability study**: run the 5-participant test in `usability-testing-plan.md` and compute SUS.
+5. **Extend the usability study**: SUS (n = 5, mean 73.5) is a good start; add task-level measures (success, time, errors) and a larger, independent sample, then re-test after fixing BUG-011, BUG-017 and BUG-018.
 6. **Optional extra scan**: run OWASP ZAP baseline against the staging site (not done here).
 
 ## 5. Expected effect

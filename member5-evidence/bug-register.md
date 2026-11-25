@@ -2,7 +2,7 @@
 
 **Member 5 – Security & Quality Assurance (EC4206 Section 3.8)**
 **Build under test:** branch `member5-security-qa` (commit `8030765`), development configuration (`NODE_ENV=development`), 2026-11-24
-**Method:** every entry below comes from a test that was actually executed (OWASP tests, browser walkthrough with axe-core, SonarQube). Nothing was invented; each bug names its test and evidence. No application code was changed by Member 5, so **all bugs are still open**.
+**Method:** every entry below comes from a test that was actually executed (OWASP tests, browser walkthrough with axe-core, SonarQube). Nothing was invented; each bug names its test and evidence. Exactly one fix was made (BUG-001, commit `e7c406c`); it passed its retest and is **Closed**. The other 17 bugs are still **New**.
 
 ## 1. Rating scales
 
@@ -23,7 +23,7 @@
 
 | ID | Title | Severity | Priority | Status | Test |
 |---|---|---|---|---|---|
-| BUG-001 | No rate limiting or lockout on login | High | P1 | New | A07-01 |
+| BUG-001 | No rate limiting or lockout on login | High | P1 | **Closed** | A07-01 |
 | BUG-002 | Unhandled HTTP 500 with internal error text on forgot/reset-password and contact | Medium | P1 | New | A03-02/03/04, A05-05 |
 | BUG-003 | Logout does not invalidate the session token | Medium | P2 | New | A07-05 |
 | BUG-004 | CORS trusts every origin (with credentials) outside production | Medium | P2 | New | A05-03 |
@@ -42,7 +42,7 @@
 | BUG-017 | No visible keyboard focus indicator on the Home search fields | Low | P3 | New | Automated keyboard check |
 | BUG-018 | Navbar buttons nested inside links create duplicate Tab stops | Low | P3 | New | Automated keyboard check |
 
-**By severity:** High 2 · Medium 7 · Low 9 · Critical 0 · **Total 18**.
+**By severity:** High 2 · Medium 7 · Low 9 · Critical 0 · **Total 18**. **By status:** Closed 1 (BUG-001) · New 17.
 **By source:** security tests 10 · accessibility/usability 6 · SonarQube 2.
 
 ## 3. Detailed entries
@@ -52,8 +52,8 @@
 - **Steps to reproduce:** 1) Register/use a test account. 2) Send 20 `POST /api/auth/login` requests with a wrong password. 3) Send one request with the correct password.
 - **Expected:** HTTP 429 (or temporary lockout) after a small number of failures.
 - **Actual:** 20 × HTTP 401, then the correct password still returns HTTP 200.
-- **Severity / Priority:** High / P1 · **Status:** New
-- **Related test:** A07-01 · **Evidence:** `screenshots/owasp-18-login-rate-limit-terminal.png`
+- **Severity / Priority:** High / P1 · **Status:** **Closed** (fixed in commit `e7c406c` on 2026-11-25; retest A07-01 passed: attempts 1-10 returned 401, attempt 11 onwards returned 429; five valid logins still returned 200). Full record in `bug-lifecycle.md`.
+- **Related test:** A07-01 · **Evidence:** `screenshots/owasp-18-login-rate-limit-terminal.png` (before), `screenshots/owasp-26-login-rate-limit-retest-after-fix-terminal.png` (after)
 
 ### BUG-002 — Unhandled HTTP 500 with internal error text
 - **Description:** `forgot-password`, `reset-password` and `contact` call string methods on unvalidated JSON fields. Sending an object instead of a string throws a `TypeError`; the central error handler returns `err.message` for every 500.

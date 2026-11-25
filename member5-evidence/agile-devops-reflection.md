@@ -29,7 +29,7 @@ Dynamic testing found real weaknesses that static analysis did not: SonarQube re
 SonarQube rated maintainability A with 0.4 % duplication, but coverage is 0 % and the Quality Gate only checks new code. A passed gate gave false comfort: quality depends on the gate's rules. Recommended: gate on coverage of new code, no new vulnerabilities, and no new high-severity bugs.
 
 ## 6. Bug management
-Bugs were recorded in a structured register (severity, priority, evidence) and analysed with 5-Whys. Three recurring root causes emerged: controls added but not wired in, inconsistent validation between endpoints, and no automated negative/accessibility testing. The defined lifecycle (New → … → Closed/Reopened) was documented, but because no fixes have been made, no bug has actually moved past **New**. In a real Agile team these would be triaged into the next sprint backlog by priority (P1 first).
+Bugs were recorded in a structured register (severity, priority, evidence) and analysed with 5-Whys. Three recurring root causes emerged: controls added but not wired in, inconsistent validation between endpoints, and no automated negative/accessibility testing. The defined lifecycle (New → … → Closed/Reopened) was documented, but BUG-001 was fixed, retested and closed to demonstrate the cycle, while the other 17 remain **New**. In a real Agile team these would be triaged into the next sprint backlog by priority (P1 first).
 
 ## 7. Collaboration
 Evidence is organised as plain files (screenshots, raw JSON, Markdown) in one folder so that any member can reproduce a finding. The work of other members is expected to connect to these results (for example, black-box and white-box test cases may cover the same validation gaps, and the CI/CD pipeline is where the recommended checks belong) but Member 5 did not review those deliverables.
@@ -40,7 +40,7 @@ Evidence is organised as plain files (screenshots, raw JSON, Markdown) in one fo
 3. Use a shared validation layer (zod middleware) and a safe error handler.
 4. Treat accessibility as a requirement: contrast tokens, axe in CI, keyboard testing.
 5. Small pull requests with review checklists (input validated? abuse case? docs/contract updated?).
-6. Run usability tests with real users early (planned in `usability-testing-plan.md`, not yet performed).
+6. Run usability tests earlier and record task-level data: the SUS questionnaire was completed by five participants only after development, without per-task timings (`usability-testing-results.md`).
 7. Keep demo credentials and dev-only conveniences (CORS bypass, quick-login) behind an explicit environment check that fails safe.
 
 ## 9. Limitations of this reflection

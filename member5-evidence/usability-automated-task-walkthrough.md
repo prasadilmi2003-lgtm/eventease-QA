@@ -2,7 +2,7 @@
 
 **Member 5 – Security & Quality Assurance** · 2026-11-24 · Raw data: `raw/automated-task-walkthrough.json`, `raw/keyboard-focus-check.json`
 
-> **This is NOT user testing.** A script drove real Chrome through the same tasks as `usability-testing-plan.md`. It shows that each workflow **can be completed** and how many clicks the shortest path needs. It cannot measure confusion, learnability, satisfaction or a **SUS score**, which need real people. No participant data was invented; `usability-testing-results.md` still does not exist.
+> **This is NOT user testing.** A script drove real Chrome through the same tasks as `usability-testing-plan.md`. It shows that each workflow **can be completed** and how many clicks the shortest path needs. It cannot measure confusion, learnability or satisfaction; perceived usability (SUS) comes from the participant questionnaire. The participant SUS results are reported separately in `usability-testing-results.md`.
 
 ## 1. Method
 Playwright controlled Google Chrome against `http://localhost:5180` using the seeded demo accounts. Each task started from a fresh browser context. The script counts clicks and typed fields along the path it takes and checks a success condition on the resulting page. Machine time is not reported because it says nothing about human speed.
@@ -47,4 +47,4 @@ Screenshot: `usability-auto-keyboard-first-main-focus.png` (the focused "Event n
 - No ticket was checked in; no database was reset.
 
 ## 6. What still needs real people
-Task success under real conditions, time on task, error counts and the SUS score. The plan, questionnaire and scoring tool are ready in `usability-testing-plan.md` and `usability-kit/`.
+Task success under real conditions, time on task and error counts were not recorded; the SUS score from five participants is in `usability-testing-results.md`. The plan, questionnaire and scoring tool are in `usability-testing-plan.md` and `usability-kit/`.

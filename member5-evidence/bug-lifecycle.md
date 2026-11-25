@@ -8,7 +8,7 @@
 
 ## 1. Process actually used in this project
 
-Bugs are recorded in `bug-register.md` (one row and one detail block per bug, with severity, priority, status, related test and evidence). Fixes are meant to be made on a Git branch and merged by pull request, then re-tested by QA. No bug tracker such as Jira was used, and no fix has been applied yet, so every bug is currently in the first state.
+Bugs are recorded in `bug-register.md` (one row and one detail block per bug, with severity, priority, status, related test and evidence). Fixes are meant to be made on a Git branch and merged by pull request, then re-tested by QA. No external bug tracker such as Jira was used; the register is a Markdown file in the repository. One bug (BUG-001) has been taken through the whole lifecycle (section 6); the other 17 are in the first state.
 
 ## 2. States and transitions
 
@@ -37,13 +37,23 @@ Bugs are recorded in `bug-register.md` (one row and one detail block per bug, wi
 
 | State | Count | Bugs |
 |---|---|---|
-| New | 18 | BUG-001 … BUG-018 |
-| Assigned / Open / In Progress / Fixed / Retest / Verified / Closed / Reopened / Rejected / Deferred | 0 | — |
+| New | 17 | BUG-002 ... BUG-018 |
+| Closed | 1 | BUG-001 |
+| Assigned / Open / In Progress / Fixed / Retest / Verified / Reopened / Rejected / Deferred | 0 | none (BUG-001 passed through them on its way to Closed) |
 
-**Suggested first moves (for the team to decide):** assign BUG-001, BUG-002 and BUG-010 (P1) first, because each has a small, well-defined fix.
+**Suggested next:** BUG-002 and BUG-010 (the other P1 bugs), because each has a small, well-defined fix.
 
-## 5. Example walk-through (BUG-001, login rate limiting)
+## 5. Real lifecycle record: BUG-001 (no rate limiting on login)
 
-New → *triage: High / P1, owner assigned* → Assigned → *confirmed, queued* → Open → *rate-limit middleware added on a branch* → In Progress → *PR merged* → Fixed → *run test A07-01: expect HTTP 429 before attempt 20* → Retest → pass → Verified → Closed; if attempt 20 still returned 401 → Reopened and back to Assigned.
+| State | Date / time | What happened | Evidence |
+|---|---|---|---|
+| **New** | 2026-11-24 | Test A07-01 sent 20 wrong-password logins; all returned 401 and the correct password still worked. Logged as BUG-001, High / P1 | `owasp-18-login-rate-limit-terminal.png` |
+| **Assigned** | 2026-11-25 | Triage: High / P1, owner Member 5 (the tester and the fixer are the same person in this assignment) | `bug-register.md` |
+| **Open** | 2026-11-25 | Confirmed from source: `express-rate-limit` was installed but never imported | `root-cause-analysis.md` (RCA-1) |
+| **In Progress** | 2026-11-25 | Change made on branch `member5-security-qa`: limiter on `POST /api/auth/login`, 10 failed attempts per 15 minutes, `skipSuccessfulRequests: true` so valid users and load tests are unaffected | `server/src/routes/authRoutes.js` |
+| **Fixed** | 2026-11-25 10:36 | Commit `e7c406c` (+12 / -1 lines in one file) | `git log` |
+| **Retest** | 2026-11-25 | Re-ran A07-01 against a private copy of the fixed API (port 5099, so the team's running server was not disturbed): attempts 1-10 returned 401, attempts 11 and 12 returned 429 with "Too many failed login attempts. Try again in 15 minutes." Regression check: five valid logins in a row returned 200 | `owasp-26-login-rate-limit-retest-after-fix-terminal.png` |
+| **Verified** | 2026-11-25 | Retest passed and no regression found | this section |
+| **Closed** | 2026-11-25 | No reopen condition met | `bug-register.md` |
 
-*(This walk-through is a worked example of the process, not a record of events that have happened.)*
+**Known limitations of the fix (not reopened, but worth knowing):** the limit is per client IP, so several users behind one IP share the 10-attempt allowance, and while the limit is reached even the correct password gets 429 until the window ends. The counter is held in server memory, so it resets when the server restarts and is not shared between several server instances. These are acceptable for this project and can be improved with a shared store (for example Redis) and per-account limits.

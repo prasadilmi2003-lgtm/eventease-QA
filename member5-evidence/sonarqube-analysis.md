@@ -89,6 +89,12 @@ Conclusion: none of the 9 "bugs" reproduced as a runtime defect; they are *not* 
 - **The valuable SonarQube findings** are the ReDoS-prone regex (S8786) and the hard-coded credentials; the "bugs" are mostly noise from a very new rule (S9383).
 - SonarQube found **none** of the real security weaknesses discovered by testing (no rate limiting, CORS, logout, unhandled 500s, unreachable reviews). Static analysis and dynamic testing are complementary.
 
-## 6. Housekeeping
+## 6. Proposed improvements (from the SonarQube findings)
+
+1. **Replace the three email regular expressions (rule S8786, `contactController.js:9`, `models/User.js:21`, `client/utils/validate.js:5`).** They backtrack quadratically (4.7 s for 80,000 characters). Validate with a bounded check instead, for example zod `z.string().trim().max(254).email()`. Expected result: three code smells and BUG-014 removed.
+2. **Add automated tests with coverage reporting.** Coverage is 0.0 % on 2.2 k coverable lines because `npm test` is an uninstrumented script. Switch to Jest or Vitest with coverage output (lcov) and feed it to SonarQube; target at least 60 % for the controllers first.
+3. **Remove hard-coded credentials and handle promises.** Move the shared demo password out of `testSuite.js` and `mock/db.js` into environment or seed configuration (S2068 ×3, BUG-015), use a cryptographic ID source or mark mock IDs as non-secret (S2245 ×2), and add `.catch(...)` to `startServer()` and the test runner (S9383). Expected result: the 5 vulnerabilities and the genuine "bugs" cleared.
+
+## 7. Housekeeping
 - The container `eventease-sonarqube` is **still running** (uses about 2.4 GB RAM) so the dashboard can be shown. Stop it with `docker stop eventease-sonarqube`; start again with `docker start eventease-sonarqube`. Remove everything (only after the report is submitted): `docker rm -f eventease-sonarqube` and `docker volume rm eventease_sonar_data eventease_sonar_logs eventease_sonar_ext`.
 - The images take about 4 GB of disk. The C: drive was ~98 % full before the pull, so free space is limited.

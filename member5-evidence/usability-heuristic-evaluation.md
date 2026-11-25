@@ -2,7 +2,7 @@
 
 **Member 5 – Security & Quality Assurance** · Evaluator: QA (expert review, **no end-user participants**) · Date: 2026-11-24
 
-This is an **expert inspection**, not a user test: it cannot replace the participant sessions in `usability-testing-plan.md`, and it produces no SUS score.
+This is an **expert inspection**, not a user test: it complements the participant SUS results in `usability-testing-results.md` and produces no SUS score itself.
 
 ## 1. What was inspected
 21 page states in real Chrome (Playwright) at 1366×860 (17) and 375×812 mobile (4), covering attendee, organizer, visitor and error pages. Each page was screenshotted and scanned with **axe-core 4.10.2** (WCAG 2.x A/AA rules). Raw output: `raw/usability-walkthrough-axe.json`.
