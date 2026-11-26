@@ -73,7 +73,7 @@ cd client
 npm install
 npm run dev      # Starts Vite dev server (proxies /api to http://localhost:5000)
 ```
-Open **`http://localhost:5173`** in your browser.
+Open **`http://localhost:5180`** in your browser.
 
 ---
 
